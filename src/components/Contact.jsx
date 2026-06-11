@@ -5,7 +5,7 @@ import { contactInfo, githubUrl } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { reveal } from "../utils/motion";
 
-const EMAIL = "info@raigeki.dev";
+const EMAIL = "robin@raigeki.dev";
 
 const copyToClipboard = async (text) => {
   try {

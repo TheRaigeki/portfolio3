@@ -130,7 +130,7 @@ export const projects = [
 ];
 
 export const contactInfo = [
-  { k: "email", v: "info@raigeki.dev" },
+  { k: "email", v: "robin@raigeki.dev" },
   { k: "location", v: "Switzerland" },
   { k: "github", v: "github.com/TheRaigeki" },
   { k: "langs", v: "DE (native) · EN (fluent)" },
