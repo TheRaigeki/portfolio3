@@ -125,7 +125,7 @@ export const projects = [
       "Can it run in the browser? Yes. An early, demanding experiment with 3D objects on the web.",
     tags: ["react", "three.js", "css"],
     image: assets.minecraft,
-    live: "https://minecraft-silk-rho.vercel.app",
+    live: "https://minecraft-five-psi.vercel.app",
   },
 ];
 

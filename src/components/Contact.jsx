@@ -1,51 +1,33 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 
-import { contactInfo } from "../constants";
+import { contactInfo, githubUrl } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { reveal } from "../utils/motion";
 
-const CONTACT_ENDPOINT =
-  import.meta.env.VITE_CONTACT_ENDPOINT || "/api/contact";
+const EMAIL = "info@raigeki.dev";
+
+const copyToClipboard = async (text) => {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    // clipboard API unavailable (insecure context / old browser)
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    ta.remove();
+  }
+};
 
 const Contact = () => {
-  const formRef = useRef();
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [loading, setLoading] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      const res = await fetch(CONTACT_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name.trim(),
-          email: form.email.trim(),
-          message: form.message.trim(),
-        }),
-      });
-
-      if (!res.ok) {
-        const { error } = await res.json().catch(() => ({}));
-        throw new Error(error || `request failed (${res.status})`);
-      }
-
-      alert("Thanks – I'll get back to you as soon as possible.");
-      setForm({ name: "", email: "", message: "" });
-    } catch (error) {
-      console.error(error);
-      alert("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
-    }
+  const handleCopy = async () => {
+    await copyToClipboard(EMAIL);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -55,55 +37,65 @@ const Contact = () => {
         <h2 className="sectitle">Get in touch.</h2>
       </motion.div>
 
-      <motion.div variants={reveal(0.05)} className="contact">
-        <form ref={formRef} onSubmit={handleSubmit}>
-          <div className="field">
-            <label>Your name</label>
-            <input
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              placeholder="Jane Doe"
-              maxLength={100}
-              required
-            />
-          </div>
-          <div className="field">
-            <label>Your email</label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="jane@foo.com"
-              maxLength={254}
-              required
-            />
-          </div>
-          <div className="field">
-            <label>Message</label>
-            <textarea
-              rows={5}
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              placeholder="Tell me something..."
-              maxLength={5000}
-              required
-            />
-          </div>
-          <button className="btn" type="submit" disabled={loading}>
-            {loading ? "sending..." : "send →"}
-          </button>
-        </form>
+      <motion.p variants={reveal(0.05)} className="secintro">
+        Have a role or a project in mind? Skip the form – my inbox is one
+        click away.
+      </motion.p>
 
-        <div className="info">
-          {contactInfo.map((row) => (
-            <div className="line" key={row.k}>
-              <span className="k">{row.k}</span>
-              <span className="v">{row.v}</span>
-            </div>
-          ))}
+      <motion.div variants={reveal(0.1)} className="term-contact">
+        <div className="term-bar">
+          <span className="term-dot td-r" />
+          <span className="term-dot td-y" />
+          <span className="term-dot td-g" />
+          <span className="term-title">robin@raigeki:~</span>
+        </div>
+
+        <div className="term-screen">
+          <div className="term-row">
+            <span className="term-prompt">~ ❯</span>
+            <span className="term-cmd">contact --robin</span>
+          </div>
+
+          <div className="term-row term-out">
+            <span className="term-key">email</span>
+            <a className="term-mail" href={`mailto:${EMAIL}`}>
+              {EMAIL}
+            </a>
+            <button
+              type="button"
+              className={`term-copy${copied ? " is-copied" : ""}`}
+              onClick={handleCopy}
+              aria-label="Copy email address"
+            >
+              {copied ? "copied ✓" : "copy"}
+            </button>
+          </div>
+
+          <div className="term-row term-out">
+            <span className="term-key">github</span>
+            <a
+              className="term-link"
+              href={githubUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {contactInfo.find((r) => r.k === "github")?.v}
+            </a>
+          </div>
+
+          {contactInfo
+            .filter((r) => r.k !== "email" && r.k !== "github")
+            .map((row) => (
+              <div className="term-row term-out" key={row.k}>
+                <span className="term-key">{row.k}</span>
+                <span className="term-val">{row.v}</span>
+              </div>
+            ))}
+
+          <div className="term-row">
+            <span className="term-prompt">~ ❯</span>
+            <span className="term-cursor" />
+          </div>
         </div>
       </motion.div>
     </>
