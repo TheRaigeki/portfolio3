@@ -1,127 +1,104 @@
-import React, { useRef, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
 
-import { styles } from "../styles";
+import { contactInfo, githubUrl } from "../constants";
 import { SectionWrapper } from "../hoc";
-import { slideIn } from "../utils/motion";
+import { reveal } from "../utils/motion";
+
+const EMAIL = "info@raigeki.dev";
+
+const copyToClipboard = async (text) => {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    // clipboard API unavailable (insecure context / old browser)
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    ta.remove();
+  }
+};
 
 const Contact = () => {
-  const formRef = useRef();
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [copied, setCopied] = useState(false);
 
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (e) => {
-    const { target } = e;
-    const { name, value } = target;
-
-    setForm({
-      ...form,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    emailjs
-      .send(
-        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-        {
-          from_name: form.name,
-          to_name: "Robin Ruf",
-          from_email: form.email,
-          to_email: "robin.ruf@hotmail.com",
-          message: form.message,
-        },
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
-      )
-      .then(
-        () => {
-          setLoading(false);
-          alert("Thank you. I will get back to you as soon as possible.");
-
-          setForm({
-            name: "",
-            email: "",
-            message: "",
-          });
-        },
-        (error) => {
-          setLoading(false);
-          console.error(error);
-
-          alert("Something went wrong. Please try again.");
-        }
-      );
+  const handleCopy = async () => {
+    await copyToClipboard(EMAIL);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
-    <div
-      className={`xl:mt-12 flex flex-row gap-10 overflow-hidden`}
-    >
-      <motion.div
-        variants={slideIn("left", "tween", 0.2, 1)}
-        className="flex-1 bg-black-100 p-8 rounded-2xl"
-      >
-        <p className={styles.sectionSubText}>Get in touch</p>
-        <h3 className={styles.sectionHeadText}>Contact.</h3>
-
-        <form
-          ref={formRef}
-          onSubmit={handleSubmit}
-          className="mt-12 flex flex-col gap-8"
-        >
-          <label className="flex flex-col">
-            <span className="text-white font-medium mb-4">Your Name</span>
-            <input
-              type="text"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              placeholder="What's your name?"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
-            />
-          </label>
-          <label className="flex flex-col">
-            <span className="text-white font-medium mb-4">Your Email</span>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="What's your mail address?"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
-            />
-          </label>
-          <label className="flex flex-col">
-            <span className="text-white font-medium mb-4">Your Message</span>
-            <textarea
-              rows={7}
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              placeholder="What you want to say?"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
-            />
-          </label>
-
-          <button
-            type="submit"
-            className="bg-tertiary py-3 px-10 w-fit rounded-xl outline-none text-white font-bold shadow-md shadow-primary"
-          >
-            {loading ? "Sending..." : "Send"}
-          </button>
-        </form>
+    <>
+      <motion.div variants={reveal()}>
+        <div className="secnum">05 / contact</div>
+        <h2 className="sectitle">Get in touch.</h2>
       </motion.div>
-    </div>
+
+      <motion.p variants={reveal(0.05)} className="secintro">
+        Have a role or a project in mind? Skip the form – my inbox is one
+        click away.
+      </motion.p>
+
+      <motion.div variants={reveal(0.1)} className="term-contact">
+        <div className="term-bar">
+          <span className="term-dot td-r" />
+          <span className="term-dot td-y" />
+          <span className="term-dot td-g" />
+          <span className="term-title">robin@raigeki:~</span>
+        </div>
+
+        <div className="term-screen">
+          <div className="term-row">
+            <span className="term-prompt">~ ❯</span>
+            <span className="term-cmd">contact --robin</span>
+          </div>
+
+          <div className="term-row term-out">
+            <span className="term-key">email</span>
+            <a className="term-mail" href={`mailto:${EMAIL}`}>
+              {EMAIL}
+            </a>
+            <button
+              type="button"
+              className={`term-copy${copied ? " is-copied" : ""}`}
+              onClick={handleCopy}
+              aria-label="Copy email address"
+            >
+              {copied ? "copied ✓" : "copy"}
+            </button>
+          </div>
+
+          <div className="term-row term-out">
+            <span className="term-key">github</span>
+            <a
+              className="term-link"
+              href={githubUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {contactInfo.find((r) => r.k === "github")?.v}
+            </a>
+          </div>
+
+          {contactInfo
+            .filter((r) => r.k !== "email" && r.k !== "github")
+            .map((row) => (
+              <div className="term-row term-out" key={row.k}>
+                <span className="term-key">{row.k}</span>
+                <span className="term-val">{row.v}</span>
+              </div>
+            ))}
+
+          <div className="term-row">
+            <span className="term-prompt">~ ❯</span>
+            <span className="term-cursor" />
+          </div>
+        </div>
+      </motion.div>
+    </>
   );
 };
 

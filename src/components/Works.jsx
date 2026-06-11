@@ -1,107 +1,43 @@
-import React from "react";
-import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 
-import { styles } from "../styles";
-import { github } from "../assets";
+import { projects, githubUrl } from "../constants";
 import { SectionWrapper } from "../hoc";
-import { projects } from "../constants";
+import { reveal } from "../utils/motion";
 
-const ProjectCard = ({
-  name,
-  description,
-  tags,
-  image,
-  isPublic,
-  source_code_link,
-  isOnline,
-  url,
-}) => {
+const ProjectCard = ({ project, index }) => {
+  const { name, repo, description, tags, image, live, source } = project;
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 100 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0, duration: 0.75 }}
-      viewport={{ once: true }}
-    >
-      <Tilt
-        options={{
-          max: 45,
-          scale: 1,
-          speed: 450,
-        }}
-        className="bg-tertiary/25 backdrop-blur-lg border border-tertiary p-5 rounded-2xl sm:w-[360px] w-full"
-      >
-        <div className="relative w-full h-[230px]">
-          <img
-            src={image}
-            alt="Project Image"
-            className="w-full h-full object-cover rounded-2xl"
-          />
-
-          {isPublic && !isOnline && (
-            <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
-              <div
-                onClick={() => window.open(source_code_link, "_blank")}
-                className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
-              >
-                <img
-                  src={github}
-                  alt="source code"
-                  className="w-1/2 h-1/2 object-contain"
-                />
-              </div>
-            </div>
+    <motion.div variants={reveal((index % 3) * 0.05)} className="card">
+      <div className="card-bar">
+        <span>{repo}</span>
+        <span className="ind">
+          {live && (
+            <a href={live} target="_blank" rel="noreferrer" className="live">
+              ● live
+            </a>
           )}
-          {isOnline && !isPublic && (
-            <div className="absolute inset-0 flex justify-start m-3 card-img_hover">
-              <div
-                onClick={() => window.open(url, "_blank")}
-                className="black-gradient w-20 h-10 rounded-full flex justify-center items-center cursor-pointer"
-              >
-                <p className="text-white text-[14px]">Website</p>
-              </div>
-            </div>
+          {source && (
+            <a href={source} target="_blank" rel="noreferrer">
+              ↗ source
+            </a>
           )}
-          {isPublic && isOnline && (
-            <div className="absolute inset-0 flex justify-between m-3 card-img_hover">
-              <div
-                onClick={() => window.open(url, "_blank")}
-                className="black-gradient w-20 h-10 rounded-full flex justify-center items-center cursor-pointer"
-              >
-                <p className="text-white text-[14px]">Website</p>
-              </div>
+        </span>
+      </div>
 
-              <div
-                onClick={() => window.open(source_code_link, "_blank")}
-                className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
-              >
-                <img
-                  src={github}
-                  alt="source code"
-                  className="w-1/2 h-1/2 object-contain"
-                />
-              </div>
-            </div>
-          )}
-        </div>
+      <div className="card-thumb">
+        <img src={image} alt={name} loading="lazy" />
+      </div>
 
-        <div className="mt-5">
-          <h3 className="text-white font-bold text-[24px]">{name}</h3>
-          <p className="mt-2 text-secondary text-[14px]">{description}</p>
-        </div>
-
-        <div className="mt-4 flex flex-wrap gap-2">
+      <div className="card-body">
+        <h3>{name}</h3>
+        <p>{description}</p>
+        <div className="tags">
           {tags.map((tag) => (
-            <p
-              key={`${name}-${tag.name}`}
-              className={`text-[14px] ${tag.color}`}
-            >
-              #{tag.name}
-            </p>
+            <span key={tag}>{tag}</span>
           ))}
         </div>
-      </Tilt>
+      </div>
     </motion.div>
   );
 };
@@ -109,51 +45,26 @@ const ProjectCard = ({
 const Works = () => {
   return (
     <>
-      <motion.div
-        initial={{ y: -50, opacity: 0 }}
-        whileInView={{ opacity: 1, x: 0, y: 0 }}
-        transition={{
-          type: "spring",
-          duration: 1.25,
-          delay: 0,
-        }}
-        viewport={{ once: true }}
-      >
-        <p className={`${styles.sectionSubText} `}>My work</p>
-        <h2 className={`${styles.sectionHeadText}`}>Projects.</h2>
+      <motion.div variants={reveal()}>
+        <div className="secnum">03 / selected work</div>
+        <h2 className="sectitle">Projects.</h2>
       </motion.div>
 
-      <div className="w-full flex">
-        <motion.p
-          initial={{ 
-            x: 0,
-            y: 0,
-            opacity: 0
-          }}
-          whileInView={{ opacity: 1, x: 0, y: 0 }}
-          transition={{
-            type: "spring",
-            delay: 0,
-            duration: 1.25,
-            ease: "easeOut"
-          }}
-          viewport={{ once: true }}
-          className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
-        >
-          Below you will find some of my projects, which I have already done or
-          on which I am currently still working. These I have created completely
-          for myself and some of them were freelance projects that I created for
-          people and companies. These are not all, you can find more on my <a target="_blank" href="https://github.com/RobinRuf" className="font-bold">GitHub</a>.{" "}
-        </motion.p>
-      </div>
+      <motion.p variants={reveal(0.05)} className="secintro">
+        A few things I built for myself and for clients. More on my{" "}
+        <a href={githubUrl} target="_blank" rel="noreferrer">
+          GitHub
+        </a>
+        .
+      </motion.p>
 
-      <div className="mt-20 flex flex-wrap gap-7 justify-center lg:justify-start">
+      <div className="cards">
         {projects.map((project, index) => (
-          <ProjectCard key={`project-${index}`} {...project} />
+          <ProjectCard key={project.name} project={project} index={index} />
         ))}
       </div>
     </>
   );
 };
 
-export default SectionWrapper(Works, "");
+export default SectionWrapper(Works, "work");

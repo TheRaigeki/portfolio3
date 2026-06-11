@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Robin Ruf — Refined Dark (prototype)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- General Sans via Fontshare; Inter as a safe fallback also loaded -->
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0E0E10;
+    --surface:#18181B;
+    --surface-2:#1f1f23;
+    --border:#27272A;
+    --border-soft:#202023;
+    --text:#FAFAFA;
+    --muted:#A1A1AA;
+    --muted-2:#71717A;
+    --accent:#D4B483;       /* warm gold */
+    --accent-soft:rgba(212,180,131,.14);
+    --radius:16px;
+    --maxw:1120px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'General Sans','Inter',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 30px}
+  .accent{color:var(--accent)}
+
+  /* ---------- NAV ---------- */
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:rgba(14,14,16,.7);border-bottom:1px solid var(--border-soft)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{font-weight:600;font-size:17px;letter-spacing:-.01em}
+  .brand .dot{color:var(--accent)}
+  .navlinks{display:flex;gap:30px;font-size:15px}
+  .navlinks a{color:var(--muted);transition:color .2s}
+  .navlinks a:hover{color:var(--text)}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;padding:96px 0 88px;overflow:hidden}
+  .glow{position:absolute;right:6%;top:18%;width:540px;height:540px;border-radius:50%;
+    background:radial-gradient(circle, var(--accent-soft), transparent 62%);filter:blur(8px);pointer-events:none;z-index:0}
+  .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  .eyebrow{font-size:14px;color:var(--accent);font-weight:600;letter-spacing:.02em;margin-bottom:20px}
+  h1.title{font-size:clamp(40px,6.4vw,72px);font-weight:600;line-height:1.04;letter-spacing:-.03em}
+  h1.title .hl{color:var(--accent)}
+  .sub{margin-top:22px;color:var(--muted);font-size:17px;max-width:440px}
+  .role-line{margin-top:18px;font-size:15px;color:var(--muted-2)}
+  .cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:9px;border-radius:999px;padding:13px 26px;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;border:1px solid transparent}
+  .btn.primary{background:var(--accent);color:#1a1505}
+  .btn.primary:hover{filter:brightness(1.08)}
+  .btn.ghost{border-color:var(--border);color:var(--text);background:transparent}
+  .btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* MacBook placeholder */
+  .macslot{position:relative;display:flex;align-items:center;justify-content:center;min-height:360px}
+  .laptop{width:340px;max-width:100%}
+  .laptop .screen{height:208px;border:2px solid #303034;border-radius:14px 14px 0 0;
+    background:radial-gradient(130% 120% at 50% 10%, rgba(212,180,131,.14), transparent 60%), #141417;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 30px 80px -24px rgba(212,180,131,.35)}
+  .laptop .base{height:15px;background:linear-gradient(#303034,#1f1f23);border-radius:0 0 16px 16px;border:2px solid #303034;border-top:none;position:relative}
+  .laptop .base::after{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:70px;height:5px;background:var(--bg);border-radius:0 0 7px 7px}
+  .slot-label{font-size:13px;color:var(--muted-2);text-align:center;margin-top:16px}
+  .slot-label .a{color:var(--accent)}
+
+  /* ---------- SECTION SHELL ---------- */
+  section.block{padding:78px 0;border-top:1px solid var(--border-soft)}
+  .secnum{font-size:14px;color:var(--accent);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+  .sectitle{font-size:clamp(30px,4.4vw,46px);font-weight:600;letter-spacing:-.02em;margin-top:10px}
+  .secintro{color:var(--muted);max-width:580px;margin-top:14px;font-size:16px}
+  .secintro a{color:var(--text);border-bottom:1px solid var(--accent)}
+
+  /* ---------- EXPERIENCE ---------- */
+  .xp{margin-top:44px;display:flex;flex-direction:column;gap:8px}
+  .xrow{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;padding:24px;border:1px solid var(--border-soft);border-radius:var(--radius);background:var(--surface);position:relative;transition:border-color .2s}
+  .xrow:hover{border-color:var(--border)}
+  .xrow::before{content:"";position:absolute;left:0;top:24px;bottom:24px;width:3px;border-radius:3px;background:var(--accent);opacity:.0;transition:opacity .2s}
+  .xrow.cur::before{opacity:1}
+  .xrow .h{font-size:21px;font-weight:600}
+  .xrow .o{color:var(--muted);font-size:15px;margin-top:2px}
+  .xrow ul{margin-top:14px;padding-left:18px;color:var(--muted);font-size:14.5px;display:flex;flex-direction:column;gap:6px}
+  .xrow .when{color:var(--muted-2);font-size:14px;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .tag-cur{display:inline-block;font-size:12px;color:var(--accent);border:1px solid var(--accent);border-radius:6px;padding:2px 8px;margin-left:10px;vertical-align:middle;font-weight:600}
+
+  /* ---------- PROJECTS ---------- */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
+  .card{border:1px solid var(--border-soft);border-radius:var(--radius);background:var(--surface);overflow:hidden;transition:transform .2s,border-color .2s,box-shadow .2s}
+  .card:hover{transform:translateY(-4px);border-color:var(--border);box-shadow:0 24px 50px -28px rgba(0,0,0,.8)}
+  .thumb{height:150px;background:linear-gradient(135deg,#222226,#161619);display:flex;align-items:center;justify-content:center;color:var(--muted-2);font-size:14px}
+  .card .body{padding:18px}
+  .card h3{font-size:19px;font-weight:600}
+  .card p{color:var(--muted);font-size:14px;margin-top:8px;min-height:60px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .tags span{font-size:12px;color:var(--muted-2);border:1px solid var(--border);border-radius:999px;padding:3px 10px}
+
+  /* ---------- SKILLS GRID ---------- */
+  .skills{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:44px}
+  .skillcol h4{font-size:14px;color:var(--accent);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border-soft)}
+  .skillcol ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .skillcol li{color:var(--text);font-size:15px}
+  .skillcol li span{color:var(--muted-2)}
+
+  /* ---------- CONTACT ---------- */
+  .contact{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start;margin-top:44px}
+  .field{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+  .field label{font-size:14px;color:var(--muted);font-weight:500}
+  .field input,.field textarea{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 16px;color:var(--text);font-family:inherit;font-size:15px;outline:none}
+  .field input:focus,.field textarea:focus{border-color:var(--accent)}
+  .info .line{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border-soft);font-size:15px}
+  .info .line .k{color:var(--muted)}
+  .info .line .v{color:var(--text);font-weight:500}
+
+  footer{border-top:1px solid var(--border-soft);padding:34px 0;font-size:13px;color:var(--muted-2);text-align:center}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:880px){
+    .hero-grid{grid-template-columns:1fr;gap:34px}
+    .macslot{order:-1;min-height:250px}
+    .cards{grid-template-columns:1fr 1fr}
+    .skills{grid-template-columns:1fr 1fr}
+    .contact{grid-template-columns:1fr}
+  }
+  @media(max-width:560px){
+    .cards{grid-template-columns:1fr}
+    .skills{grid-template-columns:1fr}
+    .xrow{grid-template-columns:1fr}
+    .xrow .when{margin-top:4px}
+    .navlinks{gap:18px;font-size:14px}
+  }
+  .protobar{background:var(--accent);color:#1a1505;font-size:12px;text-align:center;padding:6px;font-weight:600}
+</style>
+</head>
+<body>
+  <div class="protobar">PROTOTYPE · Direction B — “Refined Dark” · the boxed area is where the real 3D MacBook lives</div>
+
+  <nav>
+    <div class="wrap">
+      <div class="brand">Robin Ruf<span class="dot">.</span></div>
+      <div class="navlinks">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="glow"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Application Developer EFZ · Basel, Switzerland</div>
+        <h1 class="title">Hi, I'm Robin —<br>I build <span class="hl">fullstack</span> applications.</h1>
+        <p class="sub">From Spring Boot and Angular interfaces down to Docker Swarm and CI/CD pipelines — I like owning the whole path from code to deployment.</p>
+        <div class="cta">
+          <a href="#contact" class="btn primary">Get in touch</a>
+          <a href="#work" class="btn ghost">View work</a>
+        </div>
+      </div>
+      <div class="macslot">
+        <div>
+          <div class="laptop">
+            <div class="screen"><span style="color:var(--muted-2);font-size:13px">3D MacBook</span></div>
+            <div class="base"></div>
+          </div>
+          <div class="slot-label">↑ live <span class="a">react-three-fiber</span> model — kept as-is</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section class="block" id="about">
+    <div class="wrap">
+      <div class="secnum">Introduction</div>
+      <h2 class="sectitle">Overview.</h2>
+      <p class="secintro">I'm an Application Developer EFZ in training at <b style="color:var(--text)">Adibilis GmbH</b> in Basel, with several years of prior freelance web &amp; mobile experience. My focus is fullstack development with a genuine love for DevOps — clean code, CI/CD and Docker. You can find my full stack on my <a href="https://github.com/RobinRuf" target="_blank">GitHub</a>.</p>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="block" id="experience">
+    <div class="wrap">
+      <div class="secnum">What I've done</div>
+      <h2 class="sectitle">Experience.</h2>
+      <div class="xp">
+        <div class="xrow cur">
+          <div>
+            <div class="h">Application Developer EFZ <span class="tag-cur">current</span></div>
+            <div class="o">Adibilis GmbH · Basel</div>
+            <ul>
+              <li>Feature development for client &amp; internal projects in a Scrum team (Java / Spring Boot, Angular, Next.js)</li>
+              <li>DevOps infrastructure on Docker Swarm; building &amp; maintaining GitLab CI/CD pipelines</li>
+              <li>IPA: independent real-time dashboard for Docker Swarm (target/actual state across environments)</li>
+              <li>Code reviews, coding standards and automated tests (Unit, E2E, Integration)</li>
+            </ul>
+          </div>
+          <div class="when">2024 — present</div>
+        </div>
+        <div class="xrow">
+          <div>
+            <div class="h">Fullstack Web &amp; Mobile Developer</div>
+            <div class="o">Freelance · Remote</div>
+            <ul>
+              <li>Built responsive web applications for friends and clients</li>
+              <li>Built mobile applications</li>
+            </ul>
+          </div>
+          <div class="when">2018 — 2023</div>
+        </div>
+        <div class="xrow">
+          <div>
+            <div class="h">Informatiker EFZ — Applikationsentwicklung</div>
+            <div class="o">ipso Bildung GmbH · Basel</div>
+            <ul>
+              <li>Vocational education &amp; training in software engineering</li>
+            </ul>
+          </div>
+          <div class="when">2022 — 2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="block" id="work">
+    <div class="wrap">
+      <div class="secnum">My work</div>
+      <h2 class="sectitle">Projects.</h2>
+      <p class="secintro">A selection of personal and client projects. There's more on my <a href="https://github.com/RobinRuf" target="_blank">GitHub</a>.</p>
+      <div class="cards">
+        <div class="card"><div class="thumb">ChatGPT Messenger</div><div class="body"><h3>ChatGPT Messenger</h3><p>A lightweight SaaS on the OpenAI API — for people who'd rather not pay a $20 subscription.</p><div class="tags"><span>Next.js</span><span>OpenAI</span><span>Tailwind</span></div></div></div>
+        <div class="card"><div class="thumb">3D Portfolio</div><div class="body"><h3>3D Portfolio</h3><p>An island you fly around by plane, with checkpoints that open subpages. A Three.js playground.</p><div class="tags"><span>React</span><span>Three.js</span><span>Tailwind</span></div></div></div>
+        <div class="card"><div class="thumb">Medium Clone</div><div class="body"><h3>Medium Clone</h3><p>My first project with Sanity CMS and a solid TypeScript workout alongside Next.js.</p><div class="tags"><span>Next.js</span><span>TypeScript</span><span>Sanity</span></div></div></div>
+        <div class="card"><div class="thumb">Sapphire Draw</div><div class="body"><h3>Sapphire Draw</h3><p>A client Web3 lottery with its own on-chain contract — an early blockchain project.</p><div class="tags"><span>Next.js</span><span>Sanity</span><span>Blockchain</span></div></div></div>
+        <div class="card"><div class="thumb">Netflix Clone</div><div class="body"><h3>Netflix Clone</h3><p>Loved the UI, wanted to get comfortable with Redux. A classic build for a reason.</p><div class="tags"><span>React</span><span>Redux</span><span>CSS</span></div></div></div>
+        <div class="card"><div class="thumb">Minecraft Web</div><div class="body"><h3>Minecraft Web</h3><p>Could it run in the browser? Yes. An early, demanding experiment with 3D on the web.</p><div class="tags"><span>React</span><span>Three.js</span><span>CSS</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="block" id="skills">
+    <div class="wrap">
+      <div class="secnum">Toolbox</div>
+      <h2 class="sectitle">Skills &amp; stack.</h2>
+      <div class="skills">
+        <div class="skillcol"><h4>Frontend</h4><ul><li>TypeScript</li><li>JavaScript</li><li>React</li><li>Next.js</li><li>Angular</li><li>Tailwind</li></ul></div>
+        <div class="skillcol"><h4>Backend</h4><ul><li>Java <span>· Spring Boot</span></li><li>Node.js</li><li>C#</li><li>REST</li></ul></div>
+        <div class="skillcol"><h4>Databases</h4><ul><li>PostgreSQL</li><li>MySQL</li><li>SQL / NoSQL</li></ul></div>
+        <div class="skillcol"><h4>Tools &amp; DevOps</h4><ul><li>Git</li><li>GitLab CI/CD</li><li>Docker <span>· Swarm</span></li><li>Maven</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="block" id="contact">
+    <div class="wrap">
+      <div class="secnum">Get in touch</div>
+      <h2 class="sectitle">Contact.</h2>
+      <div class="contact">
+        <form onsubmit="return false">
+          <div class="field"><label>Your name</label><input placeholder="What's your name?"></div>
+          <div class="field"><label>Your email</label><input placeholder="What's your email?"></div>
+          <div class="field"><label>Message</label><textarea rows="5" placeholder="What do you want to say?"></textarea></div>
+          <button class="btn primary">Send message</button>
+        </form>
+        <div class="info">
+          <div class="line"><span class="k">Email</span><span class="v">info@raigeki.dev</span></div>
+          <div class="line"><span class="k">Phone</span><span class="v">+41 76 257 03 12</span></div>
+          <div class="line"><span class="k">Location</span><span class="v">Basel, Switzerland</span></div>
+          <div class="line"><span class="k">GitHub</span><span class="v">github.com/RobinRuf</span></div>
+          <div class="line"><span class="k">Web</span><span class="v">raigeki.dev</span></div>
+          <div class="line"><span class="k">Languages</span><span class="v">DE (native) · EN (fluent)</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2026 Robin Ruf · prototype</footer>
+</body>
+</html>

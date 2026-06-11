@@ -27,3 +27,5 @@ dist-ssr
 
 # vscode
 .vscode
+# local archive of old/source 3D models – not for the repo
+model-archive/

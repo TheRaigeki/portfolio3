@@ -1,10 +1,10 @@
 // Projects
-import medium from "./projects/medium.png";
 import minecraft from "./projects/minecraft.png";
-import netflix from "./projects/netflix.png";
-import sapphire from "./projects/sapphire.png";
-import threejs_portfolio from "./projects/threejs_portfolio.png";
-import chatgpt from "./projects/chatgpt.png";
+import netflix from "./projects/netflix.webp";
+import uber_clone from "./projects/uber_clone.png";
+import dotfiles from "./projects/dotfiles.png";
+import wyrm from "./projects/wyrm.webp";
+import wrktree from "./projects/wrktree.png";
 
 // utils
 import logo from "./utils/lightning.png";
@@ -37,10 +37,10 @@ export {
   close,
   ibz,
   raigeki,
-  medium,
   minecraft,
   netflix,
-  sapphire,
-  threejs_portfolio,
-  chatgpt,
+  uber_clone,
+  dotfiles,
+  wyrm,
+  wrktree,
 };
