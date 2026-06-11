@@ -1,234 +1,139 @@
 import * as assets from "../assets";
 
 export const navLinks = [
-  {
-    id: "about",
-    title: "About",
-  },
-  {
-    id: "work",
-    title: "Work",
-  },
-  {
-    id: "contact",
-    title: "Contact",
-  },
+  { id: "about", title: "about" },
+  { id: "work", title: "work" },
+  { id: "stack", title: "stack" },
+  { id: "contact", title: "contact" },
 ];
 
-const mainstack = [
-  {
-    title: "JavaScipt & TypeScript",
-    icon: assets.ts,
-  },
-  {
-    title: "C#",
-    icon: assets.csharp,
-  },
-  {
-    title: "Java",
-    icon: assets.java,
-  },
-  {
-    title: "Rust",
-    icon: assets.rust,
-  },
+export const heroChips = [
+  "typescript",
+  "java · spring boot",
+  "angular",
+  "next.js",
+  "docker",
+  "ci/cd",
 ];
 
-const experiences = [
+export const about =
+  "Application Developer EFZ in training at Adibilis GmbH, with several years of prior freelance web & mobile work. Fullstack focus, clean code, and a real appetite for DevOps – CI/CD, Docker and everything that keeps deployments boring.";
+
+export const experiences = [
   {
-    title: "Student",
-    company_name: "IBZ Basel",
-    icon: assets.ibz,
-    iconBg: "#E6DEDD",
-    date: "Aug 2022 - Present",
+    role: "Software Engineer",
+    qualifier: "(Internship)",
+    org: "Adibilis GmbH",
+    from: "2024",
+    to: "now",
+    current: true,
     points: [
-      "2 years full-time school and 2 years full-time internship as a Software Engineer",
-      "Actually, I am a self taught programmer.",
-      "After the school, I am a certificated Information Technologist.",
+      "Feature dev for client & internal projects in a Scrum team (Java / Spring Boot, Angular, Next.js)",
+      "DevOps infrastructure on Docker Swarm; built & maintain GitLab CI/CD pipelines",
+      "IPA: independent real-time dashboard for Docker Swarm (target/actual state of all environments)",
+      "Code reviews, coding standards, automated tests (Unit, E2E, Integration)",
     ],
   },
   {
-    title: "Web- & Mobile Developer",
-    company_name: "Freelance",
-    icon: assets.raigeki,
-    iconBg: "#000",
-    date: "Feb 2018 - Aug 2023",
+    role: "Fullstack Web & Mobile Developer",
+    org: "Freelance · Remote",
+    from: "2018",
+    to: "2023",
     points: [
-      "Creation of own larger projects in the web and app development area",
-      "Acceptance and implementation of freelance projects from friends and clients",
+      "Built responsive web applications for friends & clients",
+      "Built mobile applications",
     ],
   },
-];
-
-const testimonials = [
   {
-    testimonial:
-      "Robin created our company website. Since then, our customer numbers have multiplied. Very good and precise work.",
-    name: "K. Remi",
-    designation: "CEO",
-    company: "Unik Umzuege",
-  },
-  {
-    testimonial:
-      "Our workflow has been significantly optimized by this beautiful, well-structured and perfectly functioning app. Thank you very much!",
-    name: "F. Delgato",
-    designation: "Owner",
-    company: "Warehouse Management App",
-  },
-  {
-    testimonial:
-      "I enjoyed working with Robin. Quick response and a very friendly approach. His work is very professional and high quality.",
-    name: "A. Zehnder",
-    designation: "UI/UX Designer",
-    company: "Freelancer",
+    role: "Informatiker EFZ – Applikationsentwicklung",
+    org: "ipso Bildung GmbH",
+    from: "2022",
+    to: "2026",
+    points: ["Vocational education & training, software engineering"],
   },
 ];
 
-const projects = [
+export const stack = [
   {
-    name: "ChatGPT Messenger",
+    group: "frontend",
+    items: ["TypeScript", "JavaScript", "React", "Next.js", "Angular", "Tailwind"],
+  },
+  {
+    group: "backend",
+    items: ["Java · Spring Boot", "Node.js", "C#", "REST"],
+  },
+  {
+    group: "data",
+    items: ["PostgreSQL", "MySQL", "SQL / NoSQL"],
+  },
+  {
+    group: "devops",
+    items: ["Git", "GitLab CI/CD", "Docker · Swarm", "Maven"],
+  },
+];
+
+export const projects = [
+  {
+    name: "Uber Clone",
+    repo: "uber_clone",
     description:
-      "Everyone knows ChatGPT. I know some people who don't want to pay a $20 subscription. This gave me the idea of looking into the OpenAI API and publishing a SaaS at the same time.",
-    tags: [
-      {
-        name: "NextJS 13",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "OpenAI API",
-        color: "green-text-gradient",
-      },
-      {
-        name: "TailwindCSS",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: assets.chatgpt,
-    isPublic: false,
-    isOnline: true,
-    url: "https://chatgpt-messenger.app",
-    source_code_link: "https://github.com/RobinRuf/chatgpt-messenger",
+      "Uber's minimalistic mobile app rebuilt with React Native – maps, routing and ride selection included.",
+    tags: ["react native", "expo", "redux"],
+    image: assets.uber_clone,
+    source: "https://github.com/TheRaigeki/uber_clone",
+  },
+  {
+    name: "Wyrm",
+    repo: "thunderdragon",
+    description:
+      "Dragonhunter's mail client – connect your account and trade the boring inbox UI for an adventure.",
+    tags: ["next.js", "saas", "email"],
+    image: assets.wyrm,
+    live: "https://wyrm.email",
+  },
+  {
+    name: "wrktree",
+    repo: "wrktree",
+    description:
+      "A link in bio that shows your work, not just your links – live project cards with GitHub on autopilot.",
+    tags: ["next.js", "saas", "link in bio"],
+    image: assets.wrktree,
+    live: "https://wrktr.ee",
+  },
+  {
+    name: "Dotfiles",
+    repo: "dotfiles",
+    description:
+      "My Neovim, tmux & zsh setup – stow-managed and shared between macOS and Arch. The repo I touch most.",
+    tags: ["neovim", "tmux", "stow"],
+    image: assets.dotfiles,
+    source: "https://github.com/TheRaigeki/dotfiles",
   },
   {
     name: "Netflix Clone",
+    repo: "netflix-clone",
     description:
-      "I have already had to deal with React several times. However, I love trying out new libraries. I did this project first because I like the UI of Netflix and second to get more familiar with Redux.",
-    tags: [
-      {
-        name: "React",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "Redux",
-        color: "green-text-gradient",
-      },
-      {
-        name: "CSS",
-        color: "pink-text-gradient",
-      },
-    ],
+      "Loved the UI, wanted to get comfortable with Redux. A classic for a reason.",
+    tags: ["react", "redux", "css"],
     image: assets.netflix,
-    isPublic: true,
-    isOnline: false,
-    url: "",
-    source_code_link: "https://github.com/RobinRuf/netflix",
-  },
-  {
-    name: "3D Portfolio",
-    description:
-      "I created this portfolio to train my ThreeJS skills. It shows an island, where you can fly around with an airplane. At four specific checkpoints, you can see a popup, where you can go to subpages.",
-    tags: [
-      {
-        name: "React",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "ThreeJS",
-        color: "green-text-gradient",
-      },
-      {
-        name: "TailwindCSS",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: assets.threejs_portfolio,
-    isPublic: true,
-    isOnline: true,
-    url: "https://three-js-portfolio-gilt.vercel.app/",
-    source_code_link: "https://github.com/RobinRuf/ThreeJS_Portfolio",
-  },
-  {
-    name: "Medium Clone",
-    description:
-      "This Medium Clone was one of my first projects in which I tried SanityCMS. I am thrilled with this CMS. Easy condition and integration with NextJS. Also, I was able to further develop my TypeScript skills.",
-    tags: [
-      {
-        name: "NextJS 12",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "TypeScript",
-        color: "green-text-gradient",
-      },
-      {
-        name: "TailwindCSS",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: assets.medium,
-    isPublic: true,
-    isOnline: true,
-    url: "https://medium-beryl-eta.vercel.app/",
-    source_code_link: "https://github.com/RobinRuf/medium",
+    source: "https://github.com/TheRaigeki/netflix",
   },
   {
     name: "Minecraft Web",
+    repo: "minecraft-web",
     description:
-      "Everyone knows Minecraft. I'm not a fan myself, but I wanted to know if it works on the web. Also one of the first projects with TreeJS. Very demanding the whole thing with 3D objects, but also very entertaining!",
-    tags: [
-      {
-        name: "React",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "TreeJS",
-        color: "green-text-gradient",
-      },
-      {
-        name: "CSS",
-        color: "pink-text-gradient",
-      },
-    ],
+      "Can it run in the browser? Yes. An early, demanding experiment with 3D objects on the web.",
+    tags: ["react", "three.js", "css"],
     image: assets.minecraft,
-    isPublic: false,
-    isOnline: true,
-    url: "https://minecraft-silk-rho.vercel.app",
-    source_code_link: "",
-  },
-  {
-    name: "Sapphire Draw",
-    description:
-      "Sapphire Draw was actually a customer project. However, the customer no longer uses it, however I am very happy with my work. It has its own Web3 contract and was one of my first Web3 projects.",
-    tags: [
-      {
-        name: "NextJS",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "SanityCMS",
-        color: "green-text-gradient",
-      },
-      {
-        name: "Blockchain",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: assets.sapphire,
-    isPublic: true,
-    isOnline: false,
-    url: "",
-    source_code_link: "https://github.com/RobinRuf/sapphireDraw_crypto_lottery",
+    live: "https://minecraft-silk-rho.vercel.app",
   },
 ];
 
-export { mainstack, experiences, testimonials, projects };
+export const contactInfo = [
+  { k: "email", v: "info@raigeki.dev" },
+  { k: "location", v: "Switzerland" },
+  { k: "github", v: "github.com/TheRaigeki" },
+  { k: "langs", v: "DE (native) · EN (fluent)" },
+];
+
+export const githubUrl = "https://github.com/TheRaigeki";

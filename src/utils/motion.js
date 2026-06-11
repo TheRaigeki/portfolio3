@@ -1,3 +1,14 @@
+export const reveal = (delay = 0) => {
+  return {
+    hidden: { y: 16, opacity: 0 },
+    show: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.4, ease: "easeOut", delay },
+    },
+  };
+};
+
 export const textVariant = (delay) => {
   return {
     hidden: {
