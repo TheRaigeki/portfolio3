@@ -1,0 +1,4 @@
+# pnpm 10+ reads its settings from here, not from package.json.
+# esbuild ships a postinstall that links its platform binary — Vite needs it.
+allowBuilds:
+  esbuild: true

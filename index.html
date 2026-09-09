@@ -4,14 +4,22 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- paints the canvas dark before any stylesheet arrives, so a reload
+         doesn't flash white on the way to the loader -->
+    <meta name="color-scheme" content="dark" />
+    <style>
+      html {
+        background: #09090d;
+      }
+    </style>
     <meta
       name="description"
-      content="Robin — Application Developer. Fullstack engineering with a love for DevOps: Spring Boot, Angular, Next.js, Docker, CI/CD."
+      content="Robin — Software Engineer. Fullstack applications with Spring Boot and Angular on top, Docker Swarm and GitLab CI/CD underneath."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Serif+JP:wght@400&family=Manrope:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <title>Robin · raigeki.dev</title>

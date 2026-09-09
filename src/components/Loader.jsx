@@ -1,31 +1,34 @@
-import { Html, useProgress } from "@react-three/drei";
-
-const CanvasLoader = () => {
-  const { progress } = useProgress();
-  return (
-    <Html
-      as='div'
-      center
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-      }}
-    >
-      <span className='canvas-loader'></span>
-      <p
-        style={{
-          fontSize: 14,
-          color: "#F1F1F1",
-          fontWeight: 800,
-          marginTop: 40,
-        }}
+const Loader = ({ strokes, pct, fading }) => (
+  <div className="loader" style={{ opacity: fading ? 0 : 1 }}>
+    <svg viewBox="0 0 230 109" className="loader-svg">
+      <g
+        fill="none"
+        stroke="#ecebf3"
+        strokeWidth="5.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
-        {progress.toFixed(2)}%
-      </p>
-    </Html>
-  );
-};
+        {strokes.map((s, i) => (
+          <path
+            key={i}
+            d={s.d}
+            transform={s.tf}
+            style={{
+              strokeDasharray: s.len,
+              strokeDashoffset: s.len,
+              animation: `draw ${s.dur}s ${s.delay}s cubic-bezier(.3,.1,.3,1) forwards`,
+            }}
+          />
+        ))}
+      </g>
+    </svg>
+    <div className="loader-meta">
+      <span>raigeki</span>
+      <span className="loader-slash">/</span>
+      <span className="loader-pct">{String(pct).padStart(3, "0")}</span>
+      <span>%</span>
+    </div>
+  </div>
+);
 
-export default CanvasLoader;
+export default Loader;
