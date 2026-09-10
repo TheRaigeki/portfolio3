@@ -82,12 +82,12 @@ export function useStorm(canvasRef, storm, contactOpenRef) {
         g.stroke();
       };
       [[26, 0.05], [14, 0.09], [7, 0.2]].forEach(([w, a]) =>
-        strokeTo(o, segs, w * dpr, `rgba(160,140,255,${a})`)
+        strokeTo(o, segs, w * dpr, `rgba(92,158,255,${a})`)
       );
       strokeTo(o, segs, 2 * dpr, "rgba(255,255,255,1)");
       branches.forEach((b) => {
-        strokeTo(o, b, 5 * dpr, "rgba(160,140,255,.15)");
-        strokeTo(o, b, 1.2 * dpr, "rgba(230,225,255,.85)");
+        strokeTo(o, b, 5 * dpr, "rgba(92,158,255,.15)");
+        strokeTo(o, b, 1.2 * dpr, "rgba(213,228,254,.85)");
       });
       return { off, born: performance.now(), life: 320 + Math.random() * 260 };
     };
@@ -102,7 +102,7 @@ export function useStorm(canvasRef, storm, contactOpenRef) {
       const calm = contactOpenRef.current;
       ctx.clearRect(0, 0, W, H);
       const g = ctx.createRadialGradient(W * 0.6, -H * 0.2, 0, W * 0.6, -H * 0.2, H * 1.2);
-      g.addColorStop(0, `rgba(80,66,140,${cfg.glow + flash * 0.5})`);
+      g.addColorStop(0, `rgba(33,77,139,${cfg.glow + flash * 0.5})`);
       g.addColorStop(1, "rgba(9,9,13,0)");
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, W, H);
@@ -124,7 +124,7 @@ export function useStorm(canvasRef, storm, contactOpenRef) {
       }
       [0.1, 0.17, 0.24].forEach((a, i) => {
         if (!buckets[i].length) return;
-        ctx.strokeStyle = `rgba(190,180,255,${a * (calm ? 2.4 : 1) + flash * 0.3})`;
+        ctx.strokeStyle = `rgba(149,191,254,${a * (calm ? 2.4 : 1) + flash * 0.3})`;
         ctx.beginPath();
         for (const d of buckets[i]) {
           ctx.moveTo(d.x, d.y);
@@ -148,7 +148,7 @@ export function useStorm(canvasRef, storm, contactOpenRef) {
         }
       }
       if (flash > 0) {
-        ctx.fillStyle = `rgba(201,191,255,${flash * 0.18})`;
+        ctx.fillStyle = `rgba(166,200,255,${flash * 0.18})`;
         ctx.fillRect(0, 0, W, H);
         flash *= 0.86;
         if (flash < 0.01) flash = 0;

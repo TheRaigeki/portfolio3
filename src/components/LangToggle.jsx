@@ -9,14 +9,14 @@ const LangToggle = ({ lang, onSetLang }) => {
       <button
         onClick={() => onSetLang("de")}
         className="lang-btn"
-        style={{ color: de ? "#fff" : "#8b88a3" }}
+        style={{ color: de ? "#fff" : "#7d8da5" }}
       >
         de
       </button>
       <button
         onClick={() => onSetLang("en")}
         className="lang-btn"
-        style={{ color: de ? "#8b88a3" : "#fff" }}
+        style={{ color: de ? "#7d8da5" : "#fff" }}
       >
         en
       </button>

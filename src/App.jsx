@@ -14,6 +14,7 @@ import {
 } from "./components";
 import {
   DEFAULT_STORM,
+  GREETING_START,
   I18N,
   LANG_KEY,
   buildProjects,
@@ -138,7 +139,12 @@ const App = ({ storm = DEFAULT_STORM, showLoader = true }) => {
       </main>
 
       {contactOpen && ready && (
-        <Contact t={t} c={contact} onClose={() => setContact(false)} />
+        <Contact
+          t={t}
+          c={contact}
+          onClose={() => setContact(false)}
+          greetingStart={GREETING_START[lang] ?? 0}
+        />
       )}
     </>
   );

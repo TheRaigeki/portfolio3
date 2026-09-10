@@ -2,6 +2,7 @@ import About from "./About";
 import Contact from "./Contact";
 import ContactTeaser from "./ContactTeaser";
 import Footer from "./Footer";
+import Greeting from "./Greeting";
 import Hero from "./Hero";
 import LangToggle from "./LangToggle";
 import Loader from "./Loader";
@@ -16,6 +17,7 @@ export {
   Contact,
   ContactTeaser,
   Footer,
+  Greeting,
   Hero,
   LangToggle,
   Loader,

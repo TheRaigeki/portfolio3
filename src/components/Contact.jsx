@@ -1,4 +1,6 @@
-const Contact = ({ t, c, onClose }) => (
+import Greeting from "./Greeting";
+
+const Contact = ({ t, c, onClose, greetingStart }) => (
   <div className="contact">
     <div className="contact-top">
       <button onClick={onClose} className="contact-close">
@@ -12,7 +14,7 @@ const Contact = ({ t, c, onClose }) => (
       <div className="contact-inner">
         {c.isIntro && (
           <div className="contact-stage">
-            <h2 className="contact-h2">{t.hello}</h2>
+            <Greeting startIndex={greetingStart} />
             <p className="contact-p contact-p--first">{t.contactIntro}</p>
             <p className="contact-p">{t.contactIntro2}</p>
             <button
