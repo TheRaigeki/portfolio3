@@ -980,6 +980,22 @@ button:focus-visible {
   gap: 14px;
   margin-top: 8px;
 }
+.contact-botcheck {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.pill-lg:disabled {
+  cursor: progress;
+  filter: brightness(0.85);
+}
+.pill-lg:disabled:hover {
+  transform: none;
+  filter: brightness(0.85);
+}
 .contact-next {
   padding: 14px 44px;
 }

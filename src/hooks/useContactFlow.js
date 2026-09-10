@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
-import { CONTACT_EMAIL } from "../constants";
+import {
+  CONTACT_ACCESS_KEY,
+  CONTACT_ENDPOINT,
+  CONTACT_SUBJECT,
+} from "../constants";
 
 /** Steps 1–3 map onto these fields, in this order. */
 const KEYS = ["name", "email", "msg"];
@@ -17,7 +21,8 @@ const VALIDATORS = [
  */
 export function useContactFlow({ t, isDe, onClose }) {
   const [step, setStep] = useState(0);
-  const [values, setValues] = useState({ name: "", email: "", msg: "" });
+  const [values, setValues] = useState({ name: "", email: "", msg: "", botcheck: "" });
+  const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
   const closeRef = useRef(onClose);
   useEffect(() => {
@@ -28,19 +33,45 @@ export function useContactFlow({ t, isDe, onClose }) {
   const def = t.steps[i];
   const key = KEYS[i];
 
-  const submit = () => {
-    const body = encodeURIComponent(
-      `${values.msg}\n\n— ${values.name} (${values.email})`
-    );
+  /**
+   * Hands the message to the configured endpoint. Nothing is confirmed to the
+   * visitor until the endpoint says it took it — the old mailto: hand-off
+   * showed "sent" even when no mail client existed and nothing was ever sent.
+   */
+  const submit = async () => {
+    if (!CONTACT_ENDPOINT) {
+      setError(t.sendFailed);
+      return false;
+    }
+    setSending(true);
+    setError("");
     try {
-      window.open(
-        `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("raigeki.dev")}&body=${body}`,
-        "_self"
-      );
-    } catch (e) {}
+      const res = await fetch(CONTACT_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          ...(CONTACT_ACCESS_KEY ? { access_key: CONTACT_ACCESS_KEY } : {}),
+          subject: CONTACT_SUBJECT,
+          from_name: values.name,
+          name: values.name,
+          email: values.email,
+          message: values.msg,
+          // honeypot: a real visitor never sees this field, bots fill it in
+          botcheck: values.botcheck,
+        }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      return true;
+    } catch (e) {
+      setError(t.sendFailed);
+      return false;
+    } finally {
+      setSending(false);
+    }
   };
 
-  const next = () => {
+  const next = async () => {
+    if (sending) return;
     if (step === 0) {
       setStep(1);
       setError("");
@@ -52,9 +83,7 @@ export function useContactFlow({ t, isDe, onClose }) {
       return;
     }
     if (step === 3) {
-      submit();
-      setStep(4);
-      setError("");
+      if (await submit()) setStep(4);
       return;
     }
     setStep(step + 1);
@@ -79,7 +108,7 @@ export function useContactFlow({ t, isDe, onClose }) {
    * actually sent is done, and must not be sitting in the fields next time.
    */
   const toStart = () => {
-    if (step === 4) setValues({ name: "", email: "", msg: "" });
+    if (step === 4) setValues({ name: "", email: "", msg: "", botcheck: "" });
     setStep(0);
     setError("");
   };
@@ -119,7 +148,10 @@ export function useContactFlow({ t, isDe, onClose }) {
     hint: def?.hint,
     type: TYPES[i],
     value: key ? values[key] : "",
-    nextLabel: step === 3 ? t.send : t.ok,
+    nextLabel: sending ? t.sending : step === 3 ? t.send : t.ok,
+    sending,
+    botcheck: values.botcheck,
+    setBotcheck: (v) => setValues((prev) => ({ ...prev, botcheck: v })),
     next,
     back,
     toStart,

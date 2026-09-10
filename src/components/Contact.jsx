@@ -59,8 +59,24 @@ const Contact = ({ t, c, onClose, greetingStart }) => (
 
             {c.error && <div className="contact-error">{c.error}</div>}
 
+            {/* honeypot — off-screen and hidden from assistive tech, so only
+                bots ever fill it */}
+            <input
+              type="text"
+              className="contact-botcheck"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              value={c.botcheck}
+              onChange={(e) => c.setBotcheck(e.target.value)}
+            />
+
             <div className="contact-actions">
-              <button onClick={c.next} className="pill-lg contact-next">
+              <button
+                onClick={c.next}
+                disabled={c.sending}
+                className="pill-lg contact-next"
+              >
                 {c.nextLabel}
               </button>
               <div className="contact-sub">
