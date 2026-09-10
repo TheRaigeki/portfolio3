@@ -73,11 +73,13 @@ export function useContactFlow({ t, isDe, onClose }) {
   };
 
   /**
-   * Back to the intro without touching what was typed: the overlay always
-   * reopens at step 0, but a visitor who closed it by accident finds their
-   * answers still there. Values live until the page reloads.
+   * Back to the intro. What happens to the answers depends on why we left:
+   * an abandoned conversation keeps them, so an accidental close costs
+   * nothing and they survive until the page reloads — but a message that was
+   * actually sent is done, and must not be sitting in the fields next time.
    */
   const toStart = () => {
+    if (step === 4) setValues({ name: "", email: "", msg: "" });
     setStep(0);
     setError("");
   };
