@@ -1,0 +1,47 @@
+# Robin Ruf — raigeki.dev
+
+> Software engineer and freelance fullstack developer. Builds fullstack
+> applications with Spring Boot and Angular on top, Docker Swarm and GitLab
+> CI/CD underneath. Available for freelance work and open to roles.
+
+Contact: robin@raigeki.dev — usually replies within a day.
+Code: https://github.com/TheRaigeki
+Languages: German, English.
+
+## What he does
+
+- Fullstack web development: Java and Spring Boot on the backend, Angular,
+  Next.js, React and TypeScript on the frontend.
+- DevOps: Docker and Docker Swarm, GitLab CI/CD, Maven, deployment pipelines.
+- Databases: PostgreSQL, MySQL, SQL and NoSQL, REST APIs.
+
+Software engineer in training with several years of freelance work behind
+him. Works for clients as a freelancer alongside that.
+
+## Stack
+
+- Frontend: TypeScript, JavaScript, React, Next.js, Angular, Tailwind
+- Backend: Java · Spring Boot, Node.js, C#, REST
+- Data: PostgreSQL, MySQL, SQL / NoSQL
+- DevOps: Git, GitLab CI/CD, Docker · Swarm, Maven
+
+## Projects
+
+- [Wyrm](https://wyrm.email): a mail client that connects your account and
+  trades the boring inbox for an adventure. Next.js, SaaS, email. Live.
+- [wrktree](https://wrktr.ee): a link in bio that shows your work, not just
+  your links — live project cards with GitHub on autopilot. Next.js, SaaS. Live.
+- [Uber Clone](https://github.com/TheRaigeki/uber_clone): Uber's mobile app
+  rebuilt with React Native, Expo and Redux, with maps, routing and ride
+  selection. Source.
+- [Dotfiles](https://github.com/TheRaigeki/dotfiles): Neovim, tmux and zsh
+  setup, stow-managed and shared between macOS and Arch. Source.
+- [Minecraft Web](https://minecraft-five-psi.vercel.app): an early experiment
+  with 3D objects on the web. React, three.js. Live.
+- [Netflix Clone](https://github.com/TheRaigeki/netflix): built to get
+  comfortable with Redux. React, CSS. Source.
+
+## Notes for crawlers
+
+The site itself is a client-rendered React app; the same content is in a
+<noscript> block in the HTML if you do not execute JavaScript.

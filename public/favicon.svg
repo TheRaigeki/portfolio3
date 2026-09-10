@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>raigeki.dev</title>
+  <defs>
+    <!-- storm light from above, same gradient the hero canvas paints -->
+    <radialGradient id="sky" cx="50%" cy="-10%" r="95%">
+      <stop offset="0%" stop-color="#21528f"/>
+      <stop offset="55%" stop-color="#101526"/>
+      <stop offset="100%" stop-color="#09090d"/>
+    </radialGradient>
+    <!-- the flash where the bolt lands -->
+    <radialGradient id="impact" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a6c8ff" stop-opacity=".85"/>
+      <stop offset="100%" stop-color="#a6c8ff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-60%" y="-30%" width="220%" height="160%">
+      <feGaussianBlur stdDeviation="2.6"/>
+    </filter>
+  </defs>
+
+  <rect width="64" height="64" rx="13" fill="url(#sky)"/>
+
+  <!-- impact flare at the bottom centre -->
+  <ellipse cx="32" cy="57" rx="19" ry="6" fill="url(#impact)"/>
+
+  <!-- bolt: soft blue halo under a hard white core -->
+  <g>
+    <path d="M39 4 L19 34 H29 L32 60 L46 26 H36 Z" fill="#5c9eff" filter="url(#glow)" opacity=".95"/>
+    <path d="M39 4 L19 34 H29 L32 60 L46 26 H36 Z" fill="#eef4ff"/>
+  </g>
+</svg>

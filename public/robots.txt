@@ -1,0 +1,5 @@
+# raigeki.dev — everything is public, AI crawlers included.
+User-agent: *
+Allow: /
+
+Sitemap: https://raigeki.dev/sitemap.xml

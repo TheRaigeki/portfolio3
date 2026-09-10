@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://raigeki.dev/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://raigeki.dev/apps/focus-plus/privacy/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://raigeki.dev/apps/focus-plus/terms/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://raigeki.dev/apps/focus-plus/delete-account/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <priority>0.2</priority>
+  </url>
+</urlset>

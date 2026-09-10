@@ -2,20 +2,63 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- paints the canvas dark before any stylesheet arrives, so a reload
          doesn't flash white on the way to the loader -->
     <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#09090d" />
     <style>
       html {
         background: #09090d;
       }
     </style>
+
+    <title>Robin Ruf — Software Engineer &amp; Freelance Fullstack Developer</title>
+    <link rel="canonical" href="https://raigeki.dev/" />
     <meta
       name="description"
-      content="Robin — Software Engineer. Fullstack applications with Spring Boot and Angular on top, Docker Swarm and GitLab CI/CD underneath."
+      content="Software engineer and freelance fullstack developer. Spring Boot and Angular on top, Docker Swarm and GitLab CI/CD underneath — so deployments stay boring."
     />
+    <meta name="author" content="Robin Ruf" />
+
+    <!-- icons -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- link previews (X, LinkedIn, Slack, Discord, iMessage …) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="raigeki.dev" />
+    <meta property="og:url" content="https://raigeki.dev/" />
+    <meta
+      property="og:title"
+      content="Robin Ruf — Software Engineer &amp; Freelance Fullstack Developer"
+    />
+    <meta
+      property="og:description"
+      content="Fullstack applications with Spring Boot and Angular on top, Docker Swarm and GitLab CI/CD underneath — so deployments stay boring. Available for freelance work."
+    />
+    <meta property="og:image" content="https://raigeki.dev/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="raigeki.dev — Software that just works. Robin Ruf, fullstack and DevOps engineer."
+    />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="de_DE" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Robin Ruf — Software Engineer &amp; Freelance Fullstack Developer"
+    />
+    <meta
+      name="twitter:description"
+      content="Fullstack applications with Spring Boot and Angular on top, Docker Swarm and GitLab CI/CD underneath — so deployments stay boring."
+    />
+    <meta name="twitter:image" content="https://raigeki.dev/og.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -29,10 +72,178 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&family=Noto+Sans+SC:wght@500&family=Noto+Sans+JP:wght@500&family=Noto+Sans+KR:wght@500&family=Noto+Sans+Devanagari:wght@500&family=Noto+Sans+Thai:wght@500&display=swap&text=%E4%BD%A0%E5%A5%BD%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF%EC%95%88%EB%85%95%ED%95%98%EC%84%B8%EC%9A%94%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%CE%93%CE%B5%CE%B9%CE%B1%CF%83%CE%B1%CF%82%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82%E0%B8%AA%E0%B8%A7%E0%B8%B1%E0%B8%AA%E0%B8%94%E0%B8%B5"
       rel="stylesheet"
     />
-    <title>Robin · raigeki.dev</title>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://raigeki.dev/#website",
+            "url": "https://raigeki.dev/",
+            "name": "raigeki.dev",
+            "inLanguage": ["en", "de"],
+            "publisher": { "@id": "https://raigeki.dev/#robin" }
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://raigeki.dev/#page",
+            "url": "https://raigeki.dev/",
+            "name": "Robin Ruf — Software Engineer & Freelance Fullstack Developer",
+            "isPartOf": { "@id": "https://raigeki.dev/#website" },
+            "about": { "@id": "https://raigeki.dev/#robin" },
+            "primaryImageOfPage": "https://raigeki.dev/og.png"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://raigeki.dev/#robin",
+            "name": "Robin Ruf",
+            "url": "https://raigeki.dev/",
+            "image": "https://raigeki.dev/og.png",
+            "email": "mailto:robin@raigeki.dev",
+            "jobTitle": "Software Engineer",
+            "description": "Software engineer and freelance fullstack developer, focused on Java and Spring Boot on the backend, Angular and Next.js on the frontend, and DevOps work around Docker and CI/CD.",
+            "knowsLanguage": ["de", "en"],
+            "sameAs": ["https://github.com/TheRaigeki"],
+            "knowsAbout": [
+              "Software engineering",
+              "Fullstack web development",
+              "TypeScript",
+              "JavaScript",
+              "Java",
+              "Spring Boot",
+              "Angular",
+              "Next.js",
+              "React",
+              "Node.js",
+              "C#",
+              "REST APIs",
+              "PostgreSQL",
+              "MySQL",
+              "Docker",
+              "Docker Swarm",
+              "GitLab CI/CD",
+              "DevOps",
+              "Continuous integration and delivery"
+            ],
+            "makesOffer": {
+              "@type": "Offer",
+              "availability": "https://schema.org/InStock",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Freelance software development",
+                "serviceType": "Fullstack web development, DevOps, CI/CD",
+                "provider": { "@id": "https://raigeki.dev/#robin" }
+              }
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- The page is client-rendered. Crawlers that do not run JavaScript —
+         most AI crawlers among them — would otherwise read an empty document,
+         so the same content is spelled out here. -->
+    <noscript>
+      <style>
+        .fallback {
+          max-width: 46rem;
+          margin: 0 auto;
+          padding: 3rem 1.5rem;
+          color: #ecebf3;
+          font-family: system-ui, sans-serif;
+          line-height: 1.6;
+        }
+        .fallback a {
+          color: #a6c8ff;
+        }
+        .fallback h1 {
+          font-size: 2.2rem;
+          line-height: 1.15;
+        }
+        .fallback h2 {
+          margin-top: 2.5rem;
+          font-size: 1.2rem;
+        }
+        .fallback li {
+          margin-bottom: 0.6rem;
+        }
+      </style>
+      <main class="fallback">
+        <h1>Software that just works.</h1>
+        <p>
+          <strong>Robin Ruf</strong> — software engineer and freelance fullstack
+          developer. Fullstack applications with Spring Boot and Angular on top,
+          Docker Swarm and GitLab CI/CD underneath. So deployments stay boring.
+        </p>
+
+        <h2>Work</h2>
+        <ul>
+          <li>
+            <a href="https://wyrm.email">Wyrm</a> — a mail client that connects
+            your account and trades the boring inbox for an adventure. Next.js,
+            SaaS, email.
+          </li>
+          <li>
+            <a href="https://wrktr.ee">wrktree</a> — a link in bio that shows
+            your work, not just your links: live project cards with GitHub on
+            autopilot. Next.js, SaaS.
+          </li>
+          <li>
+            <a href="https://github.com/TheRaigeki/uber_clone">Uber Clone</a> —
+            Uber's mobile app rebuilt with React Native, Expo and Redux,
+            including maps, routing and ride selection.
+          </li>
+          <li>
+            <a href="https://github.com/TheRaigeki/dotfiles">Dotfiles</a> — my
+            Neovim, tmux and zsh setup, stow-managed and shared between macOS
+            and Arch.
+          </li>
+          <li>
+            <a href="https://minecraft-five-psi.vercel.app">Minecraft Web</a> —
+            an early experiment with 3D objects on the web. React, three.js.
+          </li>
+          <li>
+            <a href="https://github.com/TheRaigeki/netflix">Netflix Clone</a> —
+            built to get comfortable with Redux. React, CSS.
+          </li>
+        </ul>
+
+        <h2>About</h2>
+        <p>
+          Software engineer in training, with several years of freelance work
+          behind me. Fullstack focus, clean code, and a real appetite for
+          DevOps: CI/CD, Docker and everything that keeps deployments
+          unspectacular. The best software is the kind nobody has to think
+          about.
+        </p>
+
+        <h2>Stack</h2>
+        <ul>
+          <li>
+            <strong>Frontend:</strong> TypeScript, JavaScript, React, Next.js,
+            Angular, Tailwind
+          </li>
+          <li><strong>Backend:</strong> Java · Spring Boot, Node.js, C#, REST</li>
+          <li><strong>Data:</strong> PostgreSQL, MySQL, SQL / NoSQL</li>
+          <li>
+            <strong>DevOps:</strong> Git, GitLab CI/CD, Docker · Swarm, Maven
+          </li>
+        </ul>
+
+        <h2>Contact</h2>
+        <p>
+          A project or a role in mind? Available for freelance work. Write to
+          <a href="mailto:robin@raigeki.dev">robin@raigeki.dev</a> — I usually
+          reply within a day. More code on
+          <a href="https://github.com/TheRaigeki">GitHub</a>.
+        </p>
+      </main>
+    </noscript>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
