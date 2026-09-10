@@ -1,10 +1,10 @@
-# Robin Ruf — raigeki.dev
+# Robin — raigeki.dev
 
-> Software engineer and freelance fullstack developer. Builds fullstack
-> applications with Spring Boot and Angular on top, Docker Swarm and GitLab
-> CI/CD underneath. Available for freelance work and open to roles.
+> Portfolio of Robin, software engineer. Builds fullstack applications with
+> Spring Boot and Angular on top, Docker Swarm and GitLab CI/CD underneath.
+> This site is a showcase of his projects and stack.
 
-Contact: robin@raigeki.dev — usually replies within a day.
+Contact: robin@raigeki.dev
 Code: https://github.com/TheRaigeki
 Languages: German, English.
 
@@ -15,8 +15,7 @@ Languages: German, English.
 - DevOps: Docker and Docker Swarm, GitLab CI/CD, Maven, deployment pipelines.
 - Databases: PostgreSQL, MySQL, SQL and NoSQL, REST APIs.
 
-Software engineer with several years of freelance work behind him. Takes on
-freelance work for clients.
+Software engineer with several years of freelance work behind him.
 
 ## Stack
 
@@ -31,17 +30,15 @@ freelance work for clients.
   trades the boring inbox for an adventure. Next.js, SaaS, email. Live.
 - [wrktree](https://wrktr.ee): a link in bio that shows your work, not just
   your links — live project cards with GitHub on autopilot. Next.js, SaaS. Live.
-- [Uber Clone](https://github.com/TheRaigeki/uber_clone): Uber's mobile app
-  rebuilt with React Native, Expo and Redux, with maps, routing and ride
-  selection. Source.
 - [Dotfiles](https://github.com/TheRaigeki/dotfiles): Neovim, tmux and zsh
   setup, stow-managed and shared between macOS and Arch. Source.
 - [Minecraft Web](https://minecraft-five-psi.vercel.app): an early experiment
   with 3D objects on the web. React, three.js. Live.
-- [Netflix Clone](https://github.com/TheRaigeki/netflix): built to get
-  comfortable with Redux. React, CSS. Source.
+
+More on https://github.com/TheRaigeki — another project is in the works.
 
 ## Notes for crawlers
 
-The site itself is a client-rendered React app; the same content is in a
-<noscript> block in the HTML if you do not execute JavaScript.
+The site is a client-rendered React app. The same content is spelled out in a
+<noscript> block in the HTML, in English and German, if you do not execute
+JavaScript.

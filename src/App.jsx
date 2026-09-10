@@ -96,8 +96,16 @@ const App = ({ storm = DEFAULT_STORM, showLoader = true }) => {
   const closeMenu = () => setMenuOpen(false);
 
   const visibility = contactOpen || !ready ? "hidden" : "visible";
+  const projects = buildProjects(t);
+  // two projects are featured above; the rest share the grid with the
+  // coming-soon tile, and the column count follows how many that actually is
+  const restCount = projects.length - 2 + 1;
   const restCols =
-    vw >= 1140 ? "repeat(4,1fr)" : vw >= 560 ? "repeat(2,1fr)" : "1fr";
+    vw >= 1140
+      ? `repeat(${Math.min(restCount, 4)},1fr)`
+      : vw >= 560
+      ? "repeat(2,1fr)"
+      : "1fr";
 
   return (
     <>
@@ -133,7 +141,7 @@ const App = ({ storm = DEFAULT_STORM, showLoader = true }) => {
 
       <main className="main" style={{ visibility }}>
         <div className="shell">
-          <Work t={t} projects={buildProjects(t)} restCols={restCols} />
+          <Work t={t} projects={projects} restCols={restCols} />
           <About t={t} stack={buildStack(t)} />
           <ContactTeaser t={t} onOpenContact={() => setContact(true)} />
         </div>

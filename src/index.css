@@ -606,6 +606,69 @@ button:focus-visible {
   font-size: 11px;
 }
 
+/* coming-soon tile: no image, the brand's bolt striking into a glow instead */
+.card--soon {
+  cursor: default;
+}
+.card--soon:hover {
+  transform: none;
+  filter: brightness(1);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45),
+    inset 0 1px 1px rgba(255, 255, 255, 0.18),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.7);
+}
+.card-media--soon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+    120% 105% at 50% -15%,
+    #21528f 0%,
+    #101526 58%,
+    #0a0a11 100%
+  );
+}
+.card-media--soon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -16%;
+  transform: translateX(-50%);
+  width: 74%;
+  height: 44%;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(166, 200, 255, 0.55),
+    rgba(166, 200, 255, 0)
+  );
+  animation: soon-pulse 3.4s ease-in-out infinite;
+}
+.soon-bolt {
+  position: relative;
+  width: 30%;
+  height: auto;
+  filter: drop-shadow(0 0 16px rgba(166, 200, 255, 0.5));
+}
+.card-kind--soon {
+  color: #707f96;
+}
+@keyframes soon-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-media--soon::after {
+    animation: none;
+  }
+}
+
 /* ---------- about ---------- */
 /* supporting copy under the section lead — same body scale as the hero lede,
    so the step down from the lead reads as a real hierarchy level */

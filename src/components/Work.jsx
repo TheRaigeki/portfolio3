@@ -1,5 +1,6 @@
 import { GITHUB_URL } from "../constants";
 
+import ComingSoonCard from "./ComingSoonCard";
 import ProjectCard from "./ProjectCard";
 
 const Work = ({ t, projects, restCols }) => (
@@ -27,6 +28,7 @@ const Work = ({ t, projects, restCols }) => (
       {projects.slice(2).map((p) => (
         <ProjectCard key={p.name} project={p} small />
       ))}
+      <ComingSoonCard t={t} />
     </div>
   </section>
 );

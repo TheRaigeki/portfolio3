@@ -18,7 +18,7 @@ const Footer = ({ t }) => (
     </div>
     {/* the intro loader draws KanjiVG stroke data (Ulrich Apel), CC BY-SA 3.0 */}
     <span>
-      <span className="footer-kanji">雷撃</span> · raigeki.dev © 2026 ·{" "}
+      <span className="footer-kanji">雷撃</span> · raigeki.dev © {new Date().getFullYear()} ·{" "}
       <a
         href="https://kanjivg.tagaini.net"
         target="_blank"

@@ -1,11 +1,4 @@
-import {
-  dotfiles,
-  minecraft,
-  netflix,
-  uber_clone,
-  wrktree,
-  wyrm,
-} from "../assets";
+import { dotfiles, minecraft, wrktree, wyrm } from "../assets";
 
 export const CONTACT_EMAIL = "robin@raigeki.dev";
 export const GITHUB_URL = "https://github.com/TheRaigeki";
@@ -28,13 +21,15 @@ export const I18N = {
     navWork: 'Projekte', navAbout: 'Über mich', navContact: 'Kontakt', email: 'E-Mail', close: 'Schliessen',
     h1a: 'Software,', h1b: 'die einfach', h1c: 'läuft',
     lede: 'Fullstack-Anwendungen mit Spring Boot und Angular obendrauf, Docker Swarm und GitLab CI/CD darunter. Damit Deployments langweilig bleiben.',
-    workIntro: 'Ein paar Dinge, die ich für mich und für Kunden gebaut habe. Mehr auf',
+    workIntro: 'Ein paar Dinge, die ich gebaut habe. Mehr davon auf',
     aboutTitle: 'Software Engineer mit einigen Jahren Freelance-Arbeit im Rücken.',
     aboutP1: 'Fokus auf Fullstack, sauberen Code und ein echtes Faible für DevOps: CI/CD, Docker und alles, was Deployments unspektakulär macht.',
     aboutP2: 'Die beste Software ist die, über die niemand nachdenken muss.',
     stackGroups: ['Frontend', 'Backend', 'Daten', 'DevOps'],
     contactTitle: 'Ein Projekt oder eine Stelle im Kopf?', contactTeaser: 'Gute Arbeit beginnt mit einem klaren Gespräch.',
     getInTouch: 'Kontakt aufnehmen', hello: 'Hallo',
+    soonKind: '◦ bald', soonTitle: 'Nächstes Projekt',
+    soonText: 'Etwas Grösseres ist in Arbeit. Es landet hier, sobald es steht.',
     contactIntro: 'Schön, dass du hier bist. Drei kurze Fragen, dann landet deine Nachricht bei mir.',
     contactIntro2: 'Ich melde mich meist innerhalb eines Tages.',
     start: 'Start', pressEnter: 'Enter ↵ drücken', takes: 'Dauert etwa 1 Minute', back: 'Zurück', ok: 'OK', send: 'Senden',
@@ -47,23 +42,23 @@ export const I18N = {
     projects: [
       'Der Mail-Client des Drachenjägers: Account verbinden und die langweilige Inbox gegen ein Abenteuer tauschen.',
       'Ein Link-in-Bio, das deine Arbeit zeigt statt nur Links: Live-Projektkarten mit GitHub im Autopilot.',
-      'Ubers minimalistische Mobile-App mit React Native nachgebaut, inklusive Karten, Routing und Fahrtauswahl.',
       'Mein Neovim-, tmux- und zsh-Setup, mit stow verwaltet und zwischen macOS und Arch geteilt.',
       'Läuft das im Browser? Ja. Ein frühes, forderndes Experiment mit 3D-Objekten im Web.',
-      'Das UI gefiel mir, mit Redux wollte ich warm werden. Ein Klassiker aus gutem Grund.',
     ],
   },
   en: {
     navWork: 'Work', navAbout: 'About', navContact: 'Contact', email: 'Email', close: 'Close',
     h1a: 'Software', h1b: 'that just', h1c: 'works',
     lede: 'Fullstack applications with Spring Boot and Angular on top, Docker Swarm and GitLab CI/CD underneath. So deployments stay boring.',
-    workIntro: 'A few things I built for myself and for clients. More on',
+    workIntro: 'A few things I have built. More of them on',
     aboutTitle: 'Software engineer with several years of freelance work behind me.',
     aboutP1: 'Fullstack focus, clean code, and a real appetite for DevOps: CI/CD, Docker and everything that keeps deployments unspectacular.',
     aboutP2: 'The best software is the kind nobody has to think about.',
     stackGroups: ['Frontend', 'Backend', 'Data', 'DevOps'],
     contactTitle: 'A project or a role in mind?', contactTeaser: 'Good work begins with a clear conversation.',
     getInTouch: 'Get in touch', hello: 'Hello',
+    soonKind: '◦ soon', soonTitle: 'Next project',
+    soonText: 'Something bigger is in the works. It lands here once it stands.',
     contactIntro: 'Glad you are here. Three short questions and your message lands with me.',
     contactIntro2: 'I usually reply within a day.',
     start: 'Start', pressEnter: 'press Enter ↵', takes: 'Takes about 1 minute', back: 'Back', ok: 'OK', send: 'Send',
@@ -76,10 +71,8 @@ export const I18N = {
     projects: [
       "Dragonhunter's mail client: connect your account and trade the boring inbox UI for an adventure.",
       'A link in bio that shows your work, not just your links: live project cards with GitHub on autopilot.',
-      "Uber's minimalistic mobile app rebuilt with React Native, with maps, routing and ride selection.",
       'My Neovim, tmux and zsh setup, stow-managed and shared between macOS and Arch.',
       'Can it run in the browser? Yes. An early, demanding experiment with 3D objects on the web.',
-      'Loved the UI, wanted to get comfortable with Redux. A classic for a reason.',
     ],
   },
 };
@@ -129,10 +122,8 @@ const SOURCE = { kind: "↗ source", kindColor: "#707f96" };
 export const PROJECTS = [
   { name: "Wyrm", tags: ["next.js", "saas", "email"], image: wyrm, href: "https://wyrm.email", ...LIVE },
   { name: "wrktree", tags: ["next.js", "saas", "link in bio"], image: wrktree, href: "https://wrktr.ee", ...LIVE },
-  { name: "Uber Clone", tags: ["react native", "expo", "redux"], image: uber_clone, href: "https://github.com/TheRaigeki/uber_clone", ...SOURCE },
   { name: "Dotfiles", tags: ["neovim", "tmux", "stow"], image: dotfiles, href: "https://github.com/TheRaigeki/dotfiles", ...SOURCE },
   { name: "Minecraft Web", tags: ["react", "three.js", "css"], image: minecraft, href: "https://minecraft-five-psi.vercel.app", ...LIVE },
-  { name: "Netflix Clone", tags: ["react", "redux", "css"], image: netflix, href: "https://github.com/TheRaigeki/netflix", ...SOURCE },
 ].map((p) => ({ ...p, tagline: p.tags.join("  ·  ") }));
 
 /** Order matters: the group names come from `I18N[lang].stackGroups` by index. */

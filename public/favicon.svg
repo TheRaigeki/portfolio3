@@ -7,24 +7,31 @@
       <stop offset="55%" stop-color="#101526"/>
       <stop offset="100%" stop-color="#09090d"/>
     </radialGradient>
-    <!-- the flash where the bolt lands -->
-    <radialGradient id="impact" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#a6c8ff" stop-opacity=".85"/>
-      <stop offset="100%" stop-color="#a6c8ff" stop-opacity="0"/>
+    <!-- ground lit up by the strike: wide, soft, brightest at the point of impact -->
+    <radialGradient id="impact" cx="50%" cy="100%" r="62%">
+      <stop offset="0%" stop-color="#dceaff" stop-opacity=".95"/>
+      <stop offset="28%" stop-color="#a6c8ff" stop-opacity=".62"/>
+      <stop offset="65%" stop-color="#5c9eff" stop-opacity=".22"/>
+      <stop offset="100%" stop-color="#5c9eff" stop-opacity="0"/>
     </radialGradient>
-    <filter id="glow" x="-60%" y="-30%" width="220%" height="160%">
-      <feGaussianBlur stdDeviation="2.6"/>
+    <linearGradient id="floor" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#a6c8ff" stop-opacity=".5"/>
+      <stop offset="100%" stop-color="#a6c8ff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow" x="-70%" y="-30%" width="240%" height="170%">
+      <feGaussianBlur stdDeviation="2.2"/>
     </filter>
   </defs>
 
   <rect width="64" height="64" rx="13" fill="url(#sky)"/>
 
-  <!-- impact flare at the bottom centre -->
-  <ellipse cx="32" cy="57" rx="19" ry="6" fill="url(#impact)"/>
+  <!-- the strike lights the lower half from below -->
+  <rect x="0" y="30" width="64" height="34" fill="url(#floor)"/>
+  <ellipse cx="32" cy="60" rx="27" ry="15" fill="url(#impact)"/>
 
-  <!-- bolt: soft blue halo under a hard white core -->
+  <!-- bolt: narrow, with a soft blue halo under a hard white core -->
   <g>
-    <path d="M39 4 L19 34 H29 L32 60 L46 26 H36 Z" fill="#5c9eff" filter="url(#glow)" opacity=".95"/>
-    <path d="M39 4 L19 34 H29 L32 60 L46 26 H36 Z" fill="#eef4ff"/>
+    <path d="M38 4 L23 33 H30.5 L32.5 60 L43 27 H35.5 Z" fill="#5c9eff" filter="url(#glow)" opacity=".9"/>
+    <path d="M38 4 L23 33 H30.5 L32.5 60 L43 27 H35.5 Z" fill="#f2f7ff"/>
   </g>
 </svg>

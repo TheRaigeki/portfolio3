@@ -1,4 +1,5 @@
 import About from "./About";
+import ComingSoonCard from "./ComingSoonCard";
 import Contact from "./Contact";
 import ContactTeaser from "./ContactTeaser";
 import Footer from "./Footer";
@@ -14,6 +15,7 @@ import Work from "./Work";
 
 export {
   About,
+  ComingSoonCard,
   Contact,
   ContactTeaser,
   Footer,
