@@ -8,7 +8,8 @@ export const CONTACT_EMAIL = "robin@raigeki.dev";
  * is only needed by hosted form services that expect one (Web3Forms and
  * friends) — a self-hosted endpoint can ignore it.
  */
-export const CONTACT_ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT || "";
+export const CONTACT_ENDPOINT =
+  import.meta.env.VITE_CONTACT_ENDPOINT || "/api/contact";
 export const CONTACT_ACCESS_KEY = import.meta.env.VITE_CONTACT_ACCESS_KEY || "";
 export const CONTACT_SUBJECT = "Kontaktformular – raigeki.dev";
 export const GITHUB_URL = "https://github.com/TheRaigeki";
@@ -44,7 +45,7 @@ export const I18N = {
     contactIntro2: 'Ich melde mich meist innerhalb eines Tages.',
     start: 'Start', pressEnter: 'Enter ↵ drücken', takes: 'Dauert etwa 1 Minute', back: 'Zurück', ok: 'OK', send: 'Senden',
     sending: 'Wird gesendet …',
-    sendFailed: 'Das hat nicht geklappt. Schreib mir bitte direkt an robin@raigeki.dev.',
+    sendFailed: 'Das hat nicht geklappt. Versuch es nochmal – oder schreib mir direkt an robin@raigeki.dev.',
     sent: 'Gesendet', thanks: 'Danke', reply: 'Ich melde mich meist innerhalb eines Tages bei', backHome: 'Zurück zur Seite',
     steps: [
       { q: 'Wie heisst du?', ph: 'Dein Name', hint: 'Enter ↵', err: 'Ohne Namen ist es zu unpersönlich.' },
@@ -75,7 +76,7 @@ export const I18N = {
     contactIntro2: 'I usually reply within a day.',
     start: 'Start', pressEnter: 'press Enter ↵', takes: 'Takes about 1 minute', back: 'Back', ok: 'OK', send: 'Send',
     sending: 'Sending …',
-    sendFailed: 'That did not go through. Please write to me directly at robin@raigeki.dev.',
+    sendFailed: 'That did not go through. Try again – or write to me directly at robin@raigeki.dev.',
     sent: 'Sent', thanks: 'Thanks', reply: 'I usually get back to you within a day at', backHome: 'Back to the site',
     steps: [
       { q: "What's your name?", ph: 'Your name', hint: 'Enter ↵', err: 'Without a name this feels too impersonal.' },

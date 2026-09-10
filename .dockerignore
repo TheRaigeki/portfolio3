@@ -10,3 +10,7 @@ design
 # any pnpm-workspace.yaml as a workspace definition and demands a "packages"
 # field. Drop this line if the Dockerfile ever moves to pnpm 10+.
 pnpm-workspace.yaml
+
+# never bake secrets into the image
+.env
+.env.local
