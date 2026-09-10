@@ -4,3 +4,9 @@ dist
 prototypes
 model-archive
 README.md
+design
+# Local pnpm settings only (build-script approval for pnpm 10+). The image's
+# install runs before "COPY . ." and never sees it anyway, while pnpm 9 reads
+# any pnpm-workspace.yaml as a workspace definition and demands a "packages"
+# field. Drop this line if the Dockerfile ever moves to pnpm 10+.
+pnpm-workspace.yaml
