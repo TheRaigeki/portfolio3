@@ -15,8 +15,8 @@ Languages: German, English.
 - DevOps: Docker and Docker Swarm, GitLab CI/CD, Maven, deployment pipelines.
 - Databases: PostgreSQL, MySQL, SQL and NoSQL, REST APIs.
 
-Software engineer in training with several years of freelance work behind
-him. Works for clients as a freelancer alongside that.
+Software engineer with several years of freelance work behind him. Takes on
+freelance work for clients.
 
 ## Stack
 
