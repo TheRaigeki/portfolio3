@@ -79,7 +79,9 @@ const App = ({ storm = DEFAULT_STORM, showLoader = true }) => {
     else if (location.hash === "#contact")
       history.replaceState(null, "", location.pathname);
     setContactOpen(open);
-    contact.setError("");
+    // reopening always starts at the intro, never where the visitor left off
+    if (open) contact.setError("");
+    else contact.reset();
   }
 
   const setLang = (next) => {

@@ -72,10 +72,23 @@ export function useContactFlow({ t, isDe, onClose }) {
     setError("");
   };
 
+  /** Back to step 0 with the fields cleared — the overlay always reopens fresh. */
+  const reset = () => {
+    setStep(0);
+    setValues({ name: "", email: "", msg: "" });
+    setError("");
+  };
+
   const keyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       next();
+    }
+    // the "← Back" label promises a key; Backspace only once there is nothing
+    // left to delete, so it never eats a character the visitor still wants
+    if (e.key === "Backspace" && step > 0 && !values[key]) {
+      e.preventDefault();
+      back();
     }
     if (e.key === "Escape") closeRef.current();
   };
@@ -104,6 +117,7 @@ export function useContactFlow({ t, isDe, onClose }) {
     nextLabel: step === 3 ? t.send : t.ok,
     next,
     back,
+    reset,
     change,
     keyDown,
   };
