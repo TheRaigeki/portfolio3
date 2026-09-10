@@ -72,10 +72,13 @@ export function useContactFlow({ t, isDe, onClose }) {
     setError("");
   };
 
-  /** Back to step 0 with the fields cleared — the overlay always reopens fresh. */
-  const reset = () => {
+  /**
+   * Back to the intro without touching what was typed: the overlay always
+   * reopens at step 0, but a visitor who closed it by accident finds their
+   * answers still there. Values live until the page reloads.
+   */
+  const toStart = () => {
     setStep(0);
-    setValues({ name: "", email: "", msg: "" });
     setError("");
   };
 
@@ -117,7 +120,7 @@ export function useContactFlow({ t, isDe, onClose }) {
     nextLabel: step === 3 ? t.send : t.ok,
     next,
     back,
-    reset,
+    toStart,
     change,
     keyDown,
   };

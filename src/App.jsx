@@ -81,7 +81,7 @@ const App = ({ storm = DEFAULT_STORM, showLoader = true }) => {
     setContactOpen(open);
     // reopening always starts at the intro, never where the visitor left off
     if (open) contact.setError("");
-    else contact.reset();
+    else contact.toStart();
   }
 
   const setLang = (next) => {
