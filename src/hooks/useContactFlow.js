@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import {
   CONTACT_ACCESS_KEY,
@@ -31,18 +31,24 @@ export function useContactFlow({ t, isDe, onClose }) {
     closeRef.current = onClose;
   });
 
+  /**
+   * Snapshot of the last committed step. The effect runs after each commit, so
+   * when a handler calls goTo it still holds the step we are leaving — which is
+   * what the outgoing block needs to render itself while it fades away.
+   */
+  const snapRef = useRef(null);
+
   /** Every step change goes through here so the outgoing block can fade out. */
-  const goTo = useCallback((to) => {
-    setStep((from) => {
-      if (from !== to) setLeaving({ step: from, id: Date.now() });
-      return to;
-    });
+  const goTo = (to) => {
+    if (to === step) return;
+    if (snapRef.current) setLeaving({ ...snapRef.current, id: Date.now() });
+    setStep(to);
     setError("");
-  }, []);
+  };
 
   useEffect(() => {
     if (!leaving) return;
-    const t = setTimeout(() => setLeaving(null), 560);
+    const t = setTimeout(() => setLeaving(null), 620);
     return () => clearTimeout(t);
   }, [leaving]);
 
@@ -140,6 +146,20 @@ export function useContactFlow({ t, isDe, onClose }) {
     if (e.key === "Escape") closeRef.current();
   };
 
+  useEffect(() => {
+    snapRef.current = {
+      step,
+      question: def
+        ? typeof def.q === "function"
+          ? def.q(values.name || (isDe ? "du" : "there"))
+          : def.q
+        : "",
+      value: key ? values[key] : "",
+      placeholder: def?.ph,
+      isMessage: step === 3,
+    };
+  });
+
   return {
     step,
     error,
@@ -163,8 +183,7 @@ export function useContactFlow({ t, isDe, onClose }) {
     value: key ? values[key] : "",
     nextLabel: sending ? t.sending : step === 3 ? t.send : t.ok,
     sending,
-    leavingStep: leaving?.step ?? null,
-    leavingId: leaving?.id ?? null,
+    leaving,
     botcheck: values.botcheck,
     setBotcheck: (v) => setValues((prev) => ({ ...prev, botcheck: v })),
     next,
