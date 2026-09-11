@@ -814,17 +814,70 @@ button:focus-visible {
   width: 100%;
   max-width: 720px;
   text-align: center;
+  /* every stage shares one cell, so an outgoing block can fade over the
+     incoming one instead of the layout jumping when it unmounts */
+  display: grid;
+}
+.contact-inner > * {
+  grid-area: 1 / 1;
 }
 .contact-stage {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 22px;
-  animation: fadeUp 0.5s ease both;
+  animation: stage-in 526ms both;
+  animation-timing-function: cubic-bezier(0.34, 0.89, 0.2, 1);
+  animation-timing-function: linear(
+    0, 0.0257, 0.0877, 0.169, 0.2582, 0.348, 0.4339, 0.5133, 0.5851, 0.6486,
+    0.7042, 0.7522, 0.7934, 0.8284, 0.8579, 0.8827, 0.9035, 0.9208, 0.9351,
+    0.947, 0.9567, 0.9647, 0.9713, 0.9767, 0.9811, 0.9847, 0.9876, 0.99,
+    0.9919, 0.9935, 0.9948, 0.9958, 0.9966, 0.9973, 0.9978, 0.9982, 0.9986,
+    0.9989, 0.9991, 0.9993, 1
+  );
+}
+.contact-stage[data-leaving] {
+  animation: stage-out 300ms cubic-bezier(0.5, 0, 0.9, 0.4) both;
+  pointer-events: none;
+}
+/* when something is on its way out, let it clear before the next block
+   arrives — otherwise the two read as one blurred pile */
+.contact-stage[data-leaving] ~ .contact-stage {
+  animation-delay: 170ms;
+}
+@keyframes stage-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0px);
+  }
+}
+@keyframes stage-out {
+  from {
+    opacity: 1;
+    transform: none;
+    filter: blur(0px);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(4px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-stage,
+  .contact-stage[data-leaving] {
+    animation: none;
+  }
 }
 .contact-stage--asking {
   gap: 28px;
-  animation: fadeUp 0.45s ease both;
 }
 .contact-h2 {
   font-family: "Instrument Sans", sans-serif;
@@ -1037,9 +1090,37 @@ button:focus-visible {
   margin-top: 20px;
   padding: 14px 40px;
 }
+/* progress bar: takes over the footer once the questions start, so step 0
+   keeps its "about a minute" promise and the rest shows how far along we are */
+.contact-bar {
+  width: min(220px, 42vw);
+  height: 2px;
+  border-radius: 2px;
+  background: #232b37;
+  overflow: hidden;
+}
+.contact-bar-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: #a6c8ff;
+  transform-origin: left;
+  box-shadow: 0 0 10px rgba(166, 200, 255, 0.5);
+  transition: transform 0.5s cubic-bezier(0.34, 0.89, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-bar-fill {
+    transition: none;
+  }
+}
 .contact-foot {
   padding: 22px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.6em;
   font-family: "JetBrains Mono", monospace;
   font-size: 12px;
   letter-spacing: 0.08em;

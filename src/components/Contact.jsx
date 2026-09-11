@@ -12,8 +12,12 @@ const Contact = ({ t, c, onClose, greetingStart }) => (
 
     <div className="contact-body">
       <div className="contact-inner">
-        {c.isIntro && (
-          <div className="contact-stage">
+        {(c.isIntro || c.leavingStep === 0) && (
+          <div
+            className="contact-stage"
+            data-leaving={c.isIntro ? undefined : "true"}
+            aria-hidden={c.isIntro ? undefined : "true"}
+          >
             <Greeting startIndex={greetingStart} />
             <p className="contact-p contact-p--first">{t.contactIntro}</p>
             <p className="contact-p">{t.contactIntro2}</p>
@@ -107,7 +111,24 @@ const Contact = ({ t, c, onClose, greetingStart }) => (
       </div>
     </div>
 
-    <div className="contact-foot">{t.takes}</div>
+    <div className="contact-foot">
+      {c.isIntro ? (
+        t.takes
+      ) : (
+        <div
+          className="contact-bar"
+          role="progressbar"
+          aria-valuemin={1}
+          aria-valuemax={3}
+          aria-valuenow={Math.min(c.step, 3)}
+        >
+          <span
+            className="contact-bar-fill"
+            style={{ transform: `scaleX(${Math.min(c.step, 3) / 3})` }}
+          />
+        </div>
+      )}
+    </div>
   </div>
 );
 

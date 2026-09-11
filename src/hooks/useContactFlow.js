@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import {
   CONTACT_ACCESS_KEY,
@@ -23,11 +23,28 @@ export function useContactFlow({ t, isDe, onClose }) {
   const [step, setStep] = useState(0);
   const [values, setValues] = useState({ name: "", email: "", msg: "", botcheck: "" });
   const [sending, setSending] = useState(false);
+  // the step that is animating out; it stays mounted for one beat
+  const [leaving, setLeaving] = useState(null);
   const [error, setError] = useState("");
   const closeRef = useRef(onClose);
   useEffect(() => {
     closeRef.current = onClose;
   });
+
+  /** Every step change goes through here so the outgoing block can fade out. */
+  const goTo = useCallback((to) => {
+    setStep((from) => {
+      if (from !== to) setLeaving({ step: from, id: Date.now() });
+      return to;
+    });
+    setError("");
+  }, []);
+
+  useEffect(() => {
+    if (!leaving) return;
+    const t = setTimeout(() => setLeaving(null), 560);
+    return () => clearTimeout(t);
+  }, [leaving]);
 
   const i = step - 1;
   const def = t.steps[i];
@@ -73,8 +90,7 @@ export function useContactFlow({ t, isDe, onClose }) {
   const next = async () => {
     if (sending) return;
     if (step === 0) {
-      setStep(1);
-      setError("");
+      goTo(1);
       return;
     }
     if (step > 3) return;
@@ -83,17 +99,13 @@ export function useContactFlow({ t, isDe, onClose }) {
       return;
     }
     if (step === 3) {
-      if (await submit()) setStep(4);
+      if (await submit()) goTo(4);
       return;
     }
-    setStep(step + 1);
-    setError("");
+    goTo(step + 1);
   };
 
-  const back = () => {
-    setStep(Math.max(0, step - 1));
-    setError("");
-  };
+  const back = () => goTo(Math.max(0, step - 1));
 
   const change = (e) => {
     const v = e.target.value;
@@ -110,6 +122,7 @@ export function useContactFlow({ t, isDe, onClose }) {
   const toStart = () => {
     if (step === 4) setValues({ name: "", email: "", msg: "", botcheck: "" });
     setStep(0);
+    setLeaving(null);
     setError("");
   };
 
@@ -150,6 +163,8 @@ export function useContactFlow({ t, isDe, onClose }) {
     value: key ? values[key] : "",
     nextLabel: sending ? t.sending : step === 3 ? t.send : t.ok,
     sending,
+    leavingStep: leaving?.step ?? null,
+    leavingId: leaving?.id ?? null,
     botcheck: values.botcheck,
     setBotcheck: (v) => setValues((prev) => ({ ...prev, botcheck: v })),
     next,
