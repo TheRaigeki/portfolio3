@@ -5,6 +5,11 @@
  * ------------------------------------------------------------------ */
 
 /* ---------- base (from the design's <helmet> block) ---------- */
+html {
+  /* Chrome and Safari paint a translucent rectangle over whatever is tapped,
+     ignoring the border-radius — a blue square behind round pills. */
+  -webkit-tap-highlight-color: transparent;
+}
 html,
 body {
   margin: 0;
@@ -43,6 +48,16 @@ button:focus-visible {
 ::selection {
   background: #3090fc;
   color: #09090d;
+}
+/* A tap that lands slightly long selects the label underneath it, and the
+   selection colour is a strong blue. Controls are not there to be copied —
+   body copy and the footer address stay selectable. */
+button,
+.nav-brand,
+.nav-link,
+.menu-link {
+  -webkit-user-select: none;
+  user-select: none;
 }
 @keyframes fadeUp {
   from {
@@ -852,37 +867,25 @@ button:focus-visible {
   width: 100%;
 }
 
+/* Everything arrives the same way: up from just below, growing the last few
+   percent and pulling into focus — it reads as coming forward out of depth
+   rather than sliding in. Only the exit splits: heading up, field down. */
 .c-stage > * {
-  animation: part-in-up 420ms 170ms both;
-  animation-timing-function: cubic-bezier(0.22, 0.85, 0.3, 1);
-}
-.c-stage > .c-sink {
-  animation-name: part-in-down;
+  animation: part-in 370ms 130ms both;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.28, 1);
 }
 .c-stage[data-leaving] > * {
-  animation: part-out-up 300ms ease both;
+  animation: part-out-up 260ms ease-in both;
 }
 .c-stage[data-leaving] > .c-sink {
   animation-name: part-out-down;
 }
 
-@keyframes part-in-up {
+@keyframes part-in {
   from {
     opacity: 0;
-    transform: translateY(12px);
-    filter: blur(3px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-    filter: blur(0);
-  }
-}
-@keyframes part-in-down {
-  from {
-    opacity: 0;
-    transform: translateY(-12px);
-    filter: blur(3px);
+    transform: translateY(16px) scale(0.965);
+    filter: blur(6px);
   }
   to {
     opacity: 1;
@@ -893,15 +896,15 @@ button:focus-visible {
 @keyframes part-out-up {
   to {
     opacity: 0;
-    transform: translateY(-12px);
-    filter: blur(3px);
+    transform: translateY(-14px) scale(0.965);
+    filter: blur(6px);
   }
 }
 @keyframes part-out-down {
   to {
     opacity: 0;
-    transform: translateY(12px);
-    filter: blur(3px);
+    transform: translateY(14px) scale(0.965);
+    filter: blur(6px);
   }
 }
 @media (prefers-reduced-motion: reduce) {

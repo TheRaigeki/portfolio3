@@ -1,3 +1,5 @@
+import { useGreeting } from "../hooks/useGreeting";
+
 import Greeting from "./Greeting";
 
 /**
@@ -6,7 +8,7 @@ import Greeting from "./Greeting";
  * the same way. Rendered read-only when `ghost`, because the outgoing copy
  * stays mounted for the length of the animation and must not be focusable.
  */
-const Stage = ({ t, c, greetingStart, snap, ghost = false }) => {
+const Stage = ({ t, c, greeting, snap, ghost = false }) => {
   const step = snap ? snap.step : c.step;
   const key = ghost ? `out-${snap.id}` : `in-${step}`;
 
@@ -18,7 +20,7 @@ const Stage = ({ t, c, greetingStart, snap, ghost = false }) => {
         data-leaving={ghost || undefined}
         aria-hidden={ghost || undefined}
       >
-        <Greeting startIndex={greetingStart} />
+        <Greeting index={greeting.index} still={greeting.still} frozen={ghost} />
         <p className="contact-p contact-p--first">{t.contactIntro}</p>
         <p className="contact-p">{t.contactIntro2}</p>
       </div>
@@ -91,6 +93,8 @@ const Stage = ({ t, c, greetingStart, snap, ghost = false }) => {
 };
 
 const Contact = ({ t, c, onClose, greetingStart }) => {
+  const greeting = useGreeting(greetingStart);
+
   const primary = c.isIntro
     ? { label: t.start, onClick: c.next }
     : c.isDone
@@ -111,9 +115,9 @@ const Contact = ({ t, c, onClose, greetingStart }) => {
         <div className="contact-inner">
           <div className="c-content">
             {c.leaving && (
-              <Stage t={t} c={c} greetingStart={greetingStart} snap={c.leaving} ghost />
+              <Stage t={t} c={c} greeting={greeting} snap={c.leaving} ghost />
             )}
-            <Stage t={t} c={c} greetingStart={greetingStart} />
+            <Stage t={t} c={c} greeting={greeting} />
           </div>
 
           {/* space is reserved whether or not there is an error, so the button

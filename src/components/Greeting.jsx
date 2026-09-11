@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { GREETINGS, GREETING_INTERVAL } from "../constants";
+import { GREETINGS } from "../constants";
 
 /**
  * Splitting a word with `.split("")` cuts UTF-16 code units apart, which tears
@@ -49,26 +49,22 @@ const Word = ({ word, leaving = false }) => (
  * and out again. Timings match lue.studio/contact, but both words are stacked
  * in one grid cell and centred independently — the outgoing word must not shift
  * when the incoming one has a different length.
+ *
+ * Which word is showing comes from above (see useGreeting). `frozen` renders it
+ * as plain text: the copy that fades out with the intro must hold still rather
+ * than replay its own animation against the one carrying it away.
  */
-const Greeting = ({ startIndex = 0 }) => {
-  const [still] = useState(prefersReducedMotion);
-  const [index, setIndex] = useState(startIndex);
+const Greeting = ({ index, still = false, frozen = false }) => {
   const [leaving, setLeaving] = useState(null);
-  const indexRef = useRef(startIndex);
+  const prevRef = useRef(index);
   const idRef = useRef(0);
 
   useEffect(() => {
-    if (still) return;
-    const tick = setInterval(() => {
-      const from = indexRef.current;
-      const to = (from + 1) % GREETINGS.length;
-      indexRef.current = to;
-      idRef.current += 1;
-      setLeaving({ word: GREETINGS[from], id: idRef.current });
-      setIndex(to);
-    }, GREETING_INTERVAL);
-    return () => clearInterval(tick);
-  }, [still]);
+    if (frozen || still || prevRef.current === index) return;
+    idRef.current += 1;
+    setLeaving({ word: GREETINGS[prevRef.current], id: idRef.current });
+    prevRef.current = index;
+  }, [index, frozen, still]);
 
   // drop the outgoing word once its last character has finished leaving
   useEffect(() => {
@@ -80,7 +76,8 @@ const Greeting = ({ startIndex = 0 }) => {
     return () => clearTimeout(t);
   }, [leaving]);
 
-  if (still) return <h2 className="contact-h2 greeting">{GREETINGS[index]}</h2>;
+  if (still || frozen)
+    return <h2 className="contact-h2 greeting">{GREETINGS[index]}</h2>;
 
   return (
     <h2 className="contact-h2 greeting">

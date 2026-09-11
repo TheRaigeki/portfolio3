@@ -48,7 +48,9 @@ export function useContactFlow({ t, isDe, onClose }) {
 
   useEffect(() => {
     if (!leaving) return;
-    const t = setTimeout(() => setLeaving(null), 620);
+    // just past the 260ms exit — any shorter and the block would be pulled
+    // out of the DOM mid-animation and snap away instead of drifting off
+    const t = setTimeout(() => setLeaving(null), 330);
     return () => clearTimeout(t);
   }, [leaving]);
 
