@@ -621,7 +621,9 @@ button,
   font-size: 11px;
 }
 
-/* coming-soon tile: no image, the brand's bolt striking into a glow instead */
+/* coming-soon tile: no screenshot, the hero's thunderstorm framed instead.
+   The canvas paints sky, rain, bolt and impact; the gradient underneath is
+   only what shows until the first frame lands. */
 .card--soon {
   cursor: default;
 }
@@ -634,9 +636,6 @@ button,
 }
 .card-media--soon {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: radial-gradient(
     120% 105% at 50% -15%,
     #21528f 0%,
@@ -644,44 +643,24 @@ button,
     #0a0a11 100%
   );
 }
+.soon-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+/* the media's inner hairline sits under the canvas; draw it on top again */
 .card-media--soon::after {
   content: "";
   position: absolute;
-  left: 50%;
-  bottom: -16%;
-  transform: translateX(-50%);
-  width: 74%;
-  height: 44%;
-  border-radius: 50%;
-  background: radial-gradient(
-    closest-side,
-    rgba(166, 200, 255, 0.55),
-    rgba(166, 200, 255, 0)
-  );
-  animation: soon-pulse 3.4s ease-in-out infinite;
-}
-.soon-bolt {
-  position: relative;
-  width: 30%;
-  height: auto;
-  filter: drop-shadow(0 0 16px rgba(166, 200, 255, 0.5));
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  pointer-events: none;
 }
 .card-kind--soon {
   color: #707f96;
-}
-@keyframes soon-pulse {
-  0%,
-  100% {
-    opacity: 0.55;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .card-media--soon::after {
-    animation: none;
-  }
 }
 
 /* ---------- about ---------- */
